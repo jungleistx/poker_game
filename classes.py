@@ -112,12 +112,37 @@ class Player:
 		self.sort_hand()
 		print(self)
 		print(Hand.check_hand(self.hand))
+		print()
 
 	def sort_hand(self):
 		def rank_value(card):
 			rank_order = {'2': 0, '3': 1, '4': 2, '5': 3, '6': 4, '7': 5, '8': 6, '9': 7, 'T': 8, 'J': 9, 'Q': 10, 'K': 11, 'A': 12}
 			return rank_order.get(card.rank, 0)
 		self.hand.sort(key=lambda card: (rank_value(card), card.suit))
+
+	def swap_cards(self, deck:Deck):
+		index = 1
+		for card in self.hand:
+			print(f"{index}{'.':<4}{card}")
+			index += 1
+
+		prompt = input("\nWould you like to swap cards? (y/n): ")
+		if prompt == 'y':
+			positions = input("Enter the positions. If multiple, write them together (1 OR 235): ")
+			new_card_amount = len(positions)
+			positions = positions[::-1]
+			for char in positions:
+				del self.hand[int(char) - 1]
+
+			new_cards = deck.deal_cards(new_card_amount)
+			print('New cards:')
+			for card in new_cards:
+				print(card)
+
+			self.hand.extend(new_cards)
+			self.sort_hand()
+			return True
+		return False
 
 	def __iter__(self):
 		self.n = 0
@@ -144,3 +169,5 @@ class Game:
 		self.deck.reset_deck()
 		self.player.hand = self.deck.deal_cards(5)
 		self.player.check_hand()
+		if self.player.swap_cards(self.deck):
+			self.player.check_hand()
