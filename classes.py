@@ -50,7 +50,9 @@ class Hand(Card):
 		pass
 
 	def check_flush(self):
-		pass
+		if 5 in self.suits.values():
+			return True
+		return False
 
 	def check_same_of_a_kind(self, amount:int):
 		if amount in self.ranks.values():
