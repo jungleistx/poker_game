@@ -16,6 +16,11 @@ class Deck:
 	def shuffle(self):
 		random.shuffle(self.cards)
 
+	def deal_cards(self, amount:int):
+		dealt_cards = self.cards[:amount]
+		self.cards = self.cards[amount:]
+		return dealt_cards
+
 
 class Player:
 	def __init__(self):
@@ -28,3 +33,4 @@ class Game:
 
 	def start_game(self, player:Player):
 		self.deck.shuffle()
+		player.hand = self.deck.deal_cards(5)
