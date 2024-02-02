@@ -20,3 +20,11 @@ class Deck:
 class Player:
 	def __init__(self):
 		self.hand = []
+
+
+class Game:
+	def __init__(self):
+		self.deck = Deck()
+
+	def start_game(self, player:Player):
+		self.deck.shuffle()
