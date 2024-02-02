@@ -1,10 +1,16 @@
 import random
+import pygame
 
 
 class Card:
 	def __init__(self, suit, rank):
 		self.suit = suit
 		self.rank = rank
+		image_path = self.get_image_path()
+		self.image = pygame.image.load(image_path)
+
+	def get_image_path(self):
+		return f"img/cards/card{self.suit}{self.rank}.png"
 
 	def __str__(self):
 		return f"{self.rank} of {self.suit}"
