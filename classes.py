@@ -32,6 +32,11 @@ class Player:
 	def __init__(self):
 		self.hand = []
 
+	def sort_hand(self):
+		def rank_value(card):
+			rank_order = {'2': 0, '3': 1, '4': 2, '5': 3, '6': 4, '7': 5, '8': 6, '9': 7, '10': 8, 'J': 9, 'Q': 10, 'K': 11, 'A': 12}
+			return rank_order.get(card.rank, 0)
+		self.hand.sort(key=lambda card: (rank_value(card), card.suit))
 
 	def __iter__(self):
 		self.n = 0
@@ -56,4 +61,6 @@ class Game:
 	def start_game(self, player:Player):
 		self.deck.shuffle()
 		player.hand = self.deck.deal_cards(5)
+		print(player)
+		player.sort_hand()
 		print(player)
