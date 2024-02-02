@@ -18,6 +18,7 @@ class Deck:
 		suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
 		ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 		self.cards = [Card(suit, rank) for suit in suits for rank in ranks]
+		self.shuffle()
 
 	def shuffle(self):
 		random.shuffle(self.cards)
@@ -55,12 +56,10 @@ class Player:
 
 
 class Game:
-	def __init__(self):
+	def __init__(self, player:Player):
+		self.player = player
 		self.deck = Deck()
 
-	def start_game(self, player:Player):
-		self.deck.shuffle()
-		player.hand = self.deck.deal_cards(5)
-		print(player)
-		player.sort_hand()
-		print(player)
+	def start_game(self):
+		self.deck.reset_deck()
+		self.player.hand = self.deck.deal_cards(5)
