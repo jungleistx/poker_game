@@ -29,9 +29,44 @@ class Deck:
 		return dealt_cards
 
 
+class Hand(Card):
+
+	def __init__(self, cards:list):
+		super().__init__('', '')
+		self.reset_cards(cards)
+
+	def reset_cards(self, cards:list):
+		self.ranks = {rank: 0 for rank in ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']}
+		self.suits = {suit: 0 for suit in ['Hearts', 'Diamonds', 'Clubs', 'Spades']}
+
+		for card in self.cards:
+			self.ranks[card.rank] += 1
+			self.suits[card.suit] += 1
+
+	def check_hand(self):
+		pass
+
+	def check_straight(self):
+		pass
+
+	def check_flush(self):
+		pass
+
+	def check_same_of_a_kind(self, amount:int):
+		if amount in self.ranks.values():
+			return True
+		return False
+
+
+
+
 class Player:
 	def __init__(self):
 		self.hand = []
+
+	def check_hand(self):
+		self.sort_hand()
+		return Hand.check_hand()
 
 	def sort_hand(self):
 		def rank_value(card):
@@ -63,3 +98,5 @@ class Game:
 	def start_game(self):
 		self.deck.reset_deck()
 		self.player.hand = self.deck.deal_cards(5)
+		print(self.player)
+		print(self.player.check_hand())
