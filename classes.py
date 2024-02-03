@@ -3,6 +3,8 @@ import pygame
 
 CARD_HEIGHT = 300
 
+class GameWindow:
+	pass
 
 class Image():
 	def __init__(self, path:str, x:int=0, y:int=0):
