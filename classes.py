@@ -213,15 +213,15 @@ class Button:
 
 	def __init__(self, text:str, x=0, y=0):
 		self.text = text
-		self.x = x
-		self.y = y
-		self.coordinates = (self.x, self.y)
-		self.image = Image('img/button/button.png', 0, 0)
+		self.image = Image('img/button/button.png', x, y)
 		self.image.image = pygame.transform.scale(self.image.image, (Button.BUTTON_WIDTH, Button.BUTTON_HEIGHT))
 
 	def update_coordinates(self):
-		self.coordinates = (self.x, self.y)
 		self.image.set_current_rect()
+
+	def draw_button(self, window):
+		self.update_coordinates()
+		window.blit(self.image.image, (self.image.x, self.image.y))
 
 
 
@@ -255,8 +255,7 @@ class GameWindow:
 				card.image.y += 50
 
 	def draw_buttons(self):
-		self.swap.update_coordinates()
-		self.window.blit(self.swap.image.image, (self.swap.image.x, self.swap.image.y))
+		self.swap.draw_button(self.window)
 
 	def draw_cards(self, game:Game):
 		for card in game.player.hand:
