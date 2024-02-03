@@ -208,14 +208,14 @@ class Game:
 
 
 class Button:
-	BUTTON_HEIGHT = 130
-	BUTTON_WIDTH = 260
+	BUTTON_HEIGHT = 80
+	BUTTON_WIDTH = 160
 
 	def __init__(self, text:str, x:int=0, y:int=0, b_x:int=0, b_y:int=0):
 		self.text = text
 		self.image = Image('img/button/button.png', x, y)
 		self.image.image = pygame.transform.scale(self.image.image, (Button.BUTTON_WIDTH, Button.BUTTON_HEIGHT))
-		self.game_font = pygame.font.SysFont('chalkboard', 30)
+		self.game_font = pygame.font.SysFont('chalkboard', 28)
 		self.text_x = b_x
 		self.text_y = b_y
 
@@ -247,8 +247,8 @@ class GameWindow:
 		self.setup_buttons()
 
 	def setup_buttons(self):
-		self.swap = Button('Swap cards', 230, 510, 285, 555)
-		self.submit = Button('Continue', 610, 510, 680, 555)
+		self.swap = Button('Swap cards', 350, 535, 358, 556)
+		self.submit = Button('Continue', 580, 535, 604, 556)
 
 	def check_mouseclick_cards(self, game:Game):
 		mouse_pos = pygame.mouse.get_pos()
