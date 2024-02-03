@@ -1,12 +1,14 @@
 import random
 import pygame
 
+CARD_HEIGHT = 300
+
 
 class Image():
-	def __init__(self, path):
+	def __init__(self, path, height):
 		self.image = pygame.image.load(path)
 		self.x = 0
-		self.y = 400
+		self.y = height
 		self.width = self.image.get_width()
 		self.height = self.image.get_height()
 
@@ -29,7 +31,7 @@ class Card:
 		self.suit = suit
 		self.rank = rank
 		self.swap = False
-		self.image = Image(f"img/cards/card{self.suit}{self.rank}.png")
+		self.image = Image(f"img/cards/card{self.suit}{self.rank}.png", CARD_HEIGHT)
 
 	def __str__(self):
 		return f"{self.rank} of {self.suit}"
@@ -201,27 +203,44 @@ class Game:
 
 
 class GameWindow:
+	BLACK_BACKGROUND = (0, 0, 0)
+
 	def __init__(self):
-		self.height = 680
-		self.width = 1100
+		height = 680
+		width = 1100
 		pygame.init()
-		self.window = pygame.display.set_mode((self.width, self.height))
+		self.window = pygame.display.set_mode((width, height))
 		pygame.display.set_caption('Poker Game')
-		self.BLACK = (0, 0, 0)
 
 	def run(self, game:Game):
 		while True:
+
+			card_width = 140
+			card_gap = 50
+			x = 100
+			for card in game.player.hand:
+				card.image.x = x
+				card.image.set_rect()
+				x += card_gap + card_width
+
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					exit()
-			self.window.fill(self.BLACK)
+				if event.type == pygame.MOUSEBUTTONDOWN:
+					if event.button == 1:
+						mouse_pos = pygame.mouse.get_pos()
+						for card in game.player.hand:
+							if card.image.is_clicked(mouse_pos) and card.swap == False:
+								card.image.y -= 50
+								card.swap = True
+							elif card.image.is_clicked(mouse_pos) and card.swap == True:
+								card.swap = False
+								card.image.y += 50
 
-			image_width = 140
-			gap = 50
-			x = 100
+			self.window.fill((GameWindow.BLACK_BACKGROUND))
 			for card in game.player.hand:
-				self.window.blit(card.image, (x, 400))
-				x += gap + image_width
+				self.window.blit(card.image.image, (card.image.x, card.image.y))
 
 			pygame.display.flip()
+			pygame.time.delay(200)
