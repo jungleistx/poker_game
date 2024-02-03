@@ -241,8 +241,8 @@ class GameWindow:
 
 	def setup_buttons(self):
 		self.game_font = pygame.font.SysFont('Arial', 24)
-		self.swap = Button('Swap cards', 220, 510)
-		# self.submit = Button('Continue', 0, 0)
+		self.swap = Button('Swap cards', 230, 510)
+		self.submit = Button('Continue', 610, 510)
 
 	def check_mouseclick_cards(self, game:Game):
 		mouse_pos = pygame.mouse.get_pos()
@@ -256,6 +256,7 @@ class GameWindow:
 
 	def draw_buttons(self):
 		self.swap.draw_button(self.window)
+		self.submit.draw_button(self.window)
 
 	def draw_cards(self, game:Game):
 		for card in game.player.hand:
