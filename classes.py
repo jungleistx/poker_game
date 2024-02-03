@@ -260,17 +260,19 @@ class GameWindow:
 		for card in game.player.hand:
 			card.image.draw_image(self)
 
+	def set_card_locations(self, game:Game):
+		card_width = 140
+		card_gap = 50
+		x = 100
+		for card in game.player.hand:
+			card.image.x = x
+			card.image.set_current_rect()
+			x += card_gap + card_width
+
 	def run(self, game:Game):
 		while True:
 			self.background.draw_image(self)
-
-			card_width = 140
-			card_gap = 50
-			x = 100
-			for card in game.player.hand:
-				card.image.x = x
-				card.image.set_current_rect()
-				x += card_gap + card_width
+			self.set_card_locations(game)
 
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
