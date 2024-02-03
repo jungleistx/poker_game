@@ -260,6 +260,14 @@ class GameWindow:
 				card.swapping = False
 				card.image.y += 50
 
+	def check_mouseclick_buttons(self):
+		mouse_pos = pygame.mouse.get_pos()
+		self.swap.update_coordinates()
+		if self.swap.image.is_clicked(mouse_pos):
+			print(self.swap.text)
+		elif self.submit.image.is_clicked(mouse_pos):
+			print(self.submit.text)
+
 	def draw_buttons(self):
 		self.swap.draw_button(self.window)
 		self.submit.draw_button(self.window)
@@ -286,6 +294,7 @@ class GameWindow:
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				if event.button == 1:
 					self.check_mouseclick_cards(game)
+					self.check_mouseclick_buttons()
 
 	def run(self, game:Game):
 		while True:
