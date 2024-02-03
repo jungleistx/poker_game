@@ -233,10 +233,18 @@ class GameWindow:
 		height = 680
 		width = 1100
 		pygame.init()
-		self.window = pygame.display.set_mode((width, height))
 		pygame.display.set_caption('Poker Game')
-		self.background = Image('img/background/poker_table.jpg', 0)
+		self.window = pygame.display.set_mode((width, height))
+		self.background = Image('img/background/poker_table.jpg')
 		self.background.image = pygame.transform.scale(self.background.image, (1100, 680))
+		self.setup_buttons()
+
+	def setup_buttons(self):
+		self.game_font = pygame.font.SysFont('Arial', 24)
+		self.swap = Button('Swap cards', (0, 0))
+		# self.submit = Button('Go', (0, 0, 0, 0))
+
+
 
 	def check_mouseclick_cards(self, game:Game):
 		mouse_pos = pygame.mouse.get_pos()
@@ -248,14 +256,20 @@ class GameWindow:
 				card.swapping = False
 				card.image.y += 50
 
+	def draw_cards(self, game:Game):
+		for card in game.player.hand:
+			card.image.draw_image(self)
+
 	def run(self, game:Game):
 		while True:
+			self.background.draw_image(self)
 
 			card_width = 140
 			card_gap = 50
 			x = 100
 			for card in game.player.hand:
-				card.image.set_coordinates(x)
+				card.image.x = x
+				card.image.set_current_rect()
 				x += card_gap + card_width
 
 			for event in pygame.event.get():
@@ -266,10 +280,8 @@ class GameWindow:
 					if event.button == 1:
 						self.check_mouseclick_cards(game)
 
-			self.window.blit(self.background.image, (GameWindow.TOPLEFT))
-
-			for card in game.player.hand:
-				self.window.blit(card.image.image, (card.image.x, card.image.y))
+			self.draw_cards(game)
+			# self.draw_buttons()
 
 			pygame.display.flip()
 			pygame.time.delay(200)
