@@ -271,21 +271,23 @@ class GameWindow:
 			card.image.set_current_rect()
 			x += card_gap + card_width
 
+	def check_events(self, game:Game):
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				print('Thank you come again!')
+				pygame.quit()
+				exit()
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				if event.button == 1:
+					self.check_mouseclick_cards(game)
+
 	def run(self, game:Game):
 		while True:
 			self.background.draw_image(self)
 			self.set_card_locations(game)
-
-			for event in pygame.event.get():
-				if event.type == pygame.QUIT:
-					pygame.quit()
-					exit()
-				if event.type == pygame.MOUSEBUTTONDOWN:
-					if event.button == 1:
-						self.check_mouseclick_cards(game)
-
+			self.check_events(game)
 			self.draw_cards(game)
-			# self.draw_buttons()
+			self.draw_buttons()
 
 			pygame.display.flip()
 			pygame.time.delay(200)
