@@ -241,10 +241,8 @@ class GameWindow:
 
 	def setup_buttons(self):
 		self.game_font = pygame.font.SysFont('Arial', 24)
-		self.swap = Button('Swap cards', (0, 0))
-		# self.submit = Button('Go', (0, 0, 0, 0))
-
-
+		self.swap = Button('Swap cards', 220, 510)
+		# self.submit = Button('Continue', 0, 0)
 
 	def check_mouseclick_cards(self, game:Game):
 		mouse_pos = pygame.mouse.get_pos()
@@ -255,6 +253,10 @@ class GameWindow:
 			elif card.image.is_clicked(mouse_pos) and card.swapping == True:
 				card.swapping = False
 				card.image.y += 50
+
+	def draw_buttons(self):
+		self.swap.update_coordinates()
+		self.window.blit(self.swap.image.image, (self.swap.image.x, self.swap.image.y))
 
 	def draw_cards(self, game:Game):
 		for card in game.player.hand:
