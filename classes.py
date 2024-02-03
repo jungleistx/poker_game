@@ -27,6 +27,9 @@ class Image():
 	def set_current_rect(self):
 		self.rect = self.image.get_rect(topleft=(self.x, self.y))
 
+	def draw_image(self, gamewindow:GameWindow):
+		gamewindow.window.blit(self.image, (self.x, self.y))
+
 
 class Card:
 	def __init__(self, suit, rank):
