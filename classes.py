@@ -202,8 +202,14 @@ class Game:
 			self.player.check_hand()
 
 
+class Button:
+	def __init__(self, text:str):
+		self.text = text
+
+
 class GameWindow:
 	BLACK_BACKGROUND = (0, 0, 0)
+	TOPLEFT = (0, 0)
 
 	def __init__(self):
 		height = 680
@@ -211,6 +217,8 @@ class GameWindow:
 		pygame.init()
 		self.window = pygame.display.set_mode((width, height))
 		pygame.display.set_caption('Poker Game')
+		self.background = Image('img/background/poker_table.jpg', 0)
+		self.background.image = pygame.transform.scale(self.background.image, (1100, 680))
 
 	def run(self, game:Game):
 		while True:
@@ -238,7 +246,9 @@ class GameWindow:
 								card.swap = False
 								card.image.y += 50
 
-			self.window.fill((GameWindow.BLACK_BACKGROUND))
+			# self.window.fill((GameWindow.BLACK_BACKGROUND))
+			self.window.blit(self.background.image, (GameWindow.TOPLEFT))
+
 			for card in game.player.hand:
 				self.window.blit(card.image.image, (card.image.x, card.image.y))
 
