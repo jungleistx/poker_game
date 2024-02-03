@@ -22,6 +22,10 @@ class Image():
 		print(f'({self.x + self.width},{self.y + self.height})')
 		print()
 
+	def set_coordinates(self, x:int):
+		self.x = x
+		self.set_rect()
+
 	def set_rect(self):
 		self.rect = self.image.get_rect(topleft=(self.x, self.y))
 
@@ -30,7 +34,7 @@ class Card:
 	def __init__(self, suit, rank):
 		self.suit = suit
 		self.rank = rank
-		self.swap = False
+		self.swapping = False
 		self.image = Image(f"img/cards/card{self.suit}{self.rank}.png", CARD_HEIGHT)
 
 	def __str__(self):
@@ -147,13 +151,13 @@ class Player:
 			return rank_order.get(card.rank, 0)
 		self.hand.sort(key=lambda card: (rank_value(card), card.suit))
 
-	def swap_cards(self, deck:Deck):
+	def swapping_cards(self, deck:Deck):
 		index = 1
 		for card in self.hand:
 			print(f"{index}{'.':<4}{card}")
 			index += 1
 
-		prompt = input("\nWould you like to swap cards? (y/n): ")
+		prompt = input("\nWould you like to swapping cards? (y/n): ")
 		if prompt == 'y':
 			positions = input("Enter the positions. If multiple, write them together (1 OR 235): ")
 			new_card_amount = len(positions)
@@ -198,7 +202,7 @@ class Game:
 		self.player.hand = self.deck.deal_cards(5)
 		self.player.check_hand()
 		window.run(self)
-		if self.player.swap_cards(self.deck):
+		if self.player.swapping_cards(self.deck):
 			self.player.check_hand()
 
 
@@ -220,6 +224,16 @@ class GameWindow:
 		self.background = Image('img/background/poker_table.jpg', 0)
 		self.background.image = pygame.transform.scale(self.background.image, (1100, 680))
 
+	def check_mouseclick_cards(self, game:Game):
+		mouse_pos = pygame.mouse.get_pos()
+		for card in game.player.hand:
+			if card.image.is_clicked(mouse_pos) and card.swapping == False:
+				card.image.y -= 50
+				card.swapping = True
+			elif card.image.is_clicked(mouse_pos) and card.swapping == True:
+				card.swapping = False
+				card.image.y += 50
+
 	def run(self, game:Game):
 		while True:
 
@@ -227,8 +241,7 @@ class GameWindow:
 			card_gap = 50
 			x = 100
 			for card in game.player.hand:
-				card.image.x = x
-				card.image.set_rect()
+				card.image.set_coordinates(x)
 				x += card_gap + card_width
 
 			for event in pygame.event.get():
@@ -237,16 +250,8 @@ class GameWindow:
 					exit()
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					if event.button == 1:
-						mouse_pos = pygame.mouse.get_pos()
-						for card in game.player.hand:
-							if card.image.is_clicked(mouse_pos) and card.swap == False:
-								card.image.y -= 50
-								card.swap = True
-							elif card.image.is_clicked(mouse_pos) and card.swap == True:
-								card.swap = False
-								card.image.y += 50
+						self.check_mouseclick_cards(game)
 
-			# self.window.fill((GameWindow.BLACK_BACKGROUND))
 			self.window.blit(self.background.image, (GameWindow.TOPLEFT))
 
 			for card in game.player.hand:
