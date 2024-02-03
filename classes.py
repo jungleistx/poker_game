@@ -5,10 +5,10 @@ CARD_HEIGHT = 300
 
 
 class Image():
-	def __init__(self, path, height):
+	def __init__(self, path:str, x:int=0, y:int=0):
 		self.image = pygame.image.load(path)
-		self.x = 0
-		self.y = height
+		self.x = x
+		self.y = y
 		self.width = self.image.get_width()
 		self.height = self.image.get_height()
 
@@ -22,11 +22,7 @@ class Image():
 		print(f'({self.x + self.width},{self.y + self.height})')
 		print()
 
-	def set_coordinates(self, x:int):
-		self.x = x
-		self.set_rect()
-
-	def set_rect(self):
+	def set_current_rect(self):
 		self.rect = self.image.get_rect(topleft=(self.x, self.y))
 
 
@@ -35,7 +31,7 @@ class Card:
 		self.suit = suit
 		self.rank = rank
 		self.swapping = False
-		self.image = Image(f"img/cards/card{self.suit}{self.rank}.png", CARD_HEIGHT)
+		self.image = Image(f"img/cards/card{self.suit}{self.rank}.png", 0, CARD_HEIGHT)
 
 	def __str__(self):
 		return f"{self.rank} of {self.suit}"
