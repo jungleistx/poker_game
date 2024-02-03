@@ -2,18 +2,34 @@ import random
 import pygame
 
 
+class Image():
+	def __init__(self, path):
+		self.image = pygame.image.load(path)
+		self.x = 0
+		self.y = 400
+		self.width = self.image.get_width()
+		self.height = self.image.get_height()
+
+	def is_clicked(self, mouse_pos):
+		return self.rect.collidepoint(mouse_pos)
+
+	def print_coordinates(self):
+		print(f'({self.x},{self.y})', end='-')
+		print(f'({self.x + self.width},{self.y})')
+		print(f'({self.x},{self.y + self.height})', end='-')
+		print(f'({self.x + self.width},{self.y + self.height})')
+		print()
+
+	def set_rect(self):
+		self.rect = self.image.get_rect(topleft=(self.x, self.y))
+
+
 class Card:
 	def __init__(self, suit, rank):
 		self.suit = suit
 		self.rank = rank
-		image_path = self.get_image_path()
-		self.image = pygame.image.load(image_path)
-
-	def get_image_path(self):
-		return f"img/cards/card{self.suit}{self.rank}.png"
-
-	def get_image_dimensions(self):
-		return self.image.get_width(), self.image.get_height()
+		self.swap = False
+		self.image = Image(f"img/cards/card{self.suit}{self.rank}.png")
 
 	def __str__(self):
 		return f"{self.rank} of {self.suit}"
