@@ -208,8 +208,21 @@ class Game:
 
 
 class Button:
-	def __init__(self, text:str):
+	BUTTON_HEIGHT = 130
+	BUTTON_WIDTH = 260
+
+	def __init__(self, text:str, x=0, y=0):
 		self.text = text
+		self.x = x
+		self.y = y
+		self.coordinates = (self.x, self.y)
+		self.image = Image('img/button/button.png', 0, 0)
+		self.image.image = pygame.transform.scale(self.image.image, (Button.BUTTON_WIDTH, Button.BUTTON_HEIGHT))
+
+	def update_coordinates(self):
+		self.coordinates = (self.x, self.y)
+		self.image.set_current_rect()
+
 
 
 class GameWindow:
