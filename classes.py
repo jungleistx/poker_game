@@ -12,6 +12,9 @@ class Card:
 	def get_image_path(self):
 		return f"img/cards/card{self.suit}{self.rank}.png"
 
+	def get_image_dimensions(self):
+		return self.image.get_width(), self.image.get_height()
+
 	def __str__(self):
 		return f"{self.rank} of {self.suit}"
 
@@ -173,7 +176,36 @@ class Game:
 
 	def start_game(self):
 		self.deck.reset_deck()
+		window = GameWindow()
 		self.player.hand = self.deck.deal_cards(5)
 		self.player.check_hand()
+		window.run(self)
 		if self.player.swap_cards(self.deck):
 			self.player.check_hand()
+
+
+class GameWindow:
+	def __init__(self):
+		self.height = 680
+		self.width = 1100
+		pygame.init()
+		self.window = pygame.display.set_mode((self.width, self.height))
+		pygame.display.set_caption('Poker Game')
+		self.BLACK = (0, 0, 0)
+
+	def run(self, game:Game):
+		while True:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					pygame.quit()
+					exit()
+			self.window.fill(self.BLACK)
+
+			image_width = 140
+			gap = 50
+			x = 100
+			for card in game.player.hand:
+				self.window.blit(card.image, (x, 400))
+				x += gap + image_width
+
+			pygame.display.flip()
