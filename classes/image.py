@@ -2,7 +2,7 @@ import pygame
 
 
 class Image():
-	def __init__(self, path:str, x:int=0, y:int=0, pygame:pygame):
+	def __init__(self, path:str, x:int=0, y:int=0, pygame):
 		self.image = pygame.image.load(path)
 		self.x = x
 		self.y = y
