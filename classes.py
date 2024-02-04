@@ -152,6 +152,24 @@ class Player:
 			return rank_order.get(card.rank, 0)
 		self.hand.sort(key=lambda card: (rank_value(card), card.suit))
 
+	def deal_new_cards(self, amount:int, deck:Deck):
+		new_cards = deck.deal_cards(amount)
+		self.hand.extend(new_cards)
+
+	def check_swaps(self, deck:Deck):
+		swap_amount = 0
+		swapping = True
+		while swapping:
+			swapping = False
+			for card in self.hand:
+				if card.swapping:
+					swap_amount += 1
+					self.hand.remove(card)
+					swapping = True
+		if swap_amount:
+			self.deal_new_cards(swap_amount, deck)
+		self.sort_hand()
+
 	def swapping_cards(self, deck:Deck):
 		index = 1
 		for card in self.hand:
@@ -203,8 +221,8 @@ class Game:
 		self.player.hand = self.deck.deal_cards(5)
 		self.player.check_hand()
 		window.run(self)
-		if self.player.swapping_cards(self.deck):
-			self.player.check_hand()
+		# if self.player.swapping_cards(self.deck):
+		# 	self.player.check_hand()
 
 
 class Button:
@@ -260,10 +278,11 @@ class GameWindow:
 				card.swapping = False
 				card.image.y += 50
 
-	def check_mouseclick_buttons(self):
+	def check_mouseclick_buttons(self, game:Game):
 		mouse_pos = pygame.mouse.get_pos()
 		self.swap.update_coordinates()
 		if self.swap.image.is_clicked(mouse_pos):
+			game.player.check_swaps(game.deck)
 			print(self.swap.text)
 		elif self.submit.image.is_clicked(mouse_pos):
 			print(self.submit.text)
@@ -294,7 +313,7 @@ class GameWindow:
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				if event.button == 1:
 					self.check_mouseclick_cards(game)
-					self.check_mouseclick_buttons()
+					self.check_mouseclick_buttons(game)
 
 	def run(self, game:Game):
 		while True:
@@ -305,4 +324,4 @@ class GameWindow:
 			self.draw_buttons()
 
 			pygame.display.flip()
-			pygame.time.delay(200)
+			# pygame.time.delay(200)
