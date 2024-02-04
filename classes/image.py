@@ -1,3 +1,5 @@
+import pygame
+
 
 class Image():
 	def __init__(self, path:str, x:int=0, y:int=0, pygame:pygame):
