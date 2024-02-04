@@ -10,5 +10,5 @@ class Card:
 		self.swapping = False
 		self.image = Image(f"img/cards/card{self.suit}{self.rank}.png", 0, Card.card_height)
 
-	def __str__(self):
+	def __str__(self) -> str:
 		return f"{self.rank} of {self.suit}"
