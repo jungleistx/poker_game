@@ -142,7 +142,6 @@ class Player:
 
 	def check_hand(self):
 		self.sort_hand()
-		print(self)
 		print(Hand.check_hand(self.hand))
 		print()
 
@@ -283,9 +282,8 @@ class GameWindow:
 		self.swap.update_coordinates()
 		if self.swap.image.is_clicked(mouse_pos):
 			game.player.check_swaps(game.deck)
-			print(self.swap.text)
 		elif self.submit.image.is_clicked(mouse_pos):
-			print(self.submit.text)
+			game.player.check_hand()
 
 	def draw_buttons(self):
 		self.swap.draw_button(self.window)
@@ -314,6 +312,11 @@ class GameWindow:
 				if event.button == 1:
 					self.check_mouseclick_cards(game)
 					self.check_mouseclick_buttons(game)
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_s:
+					game.player.check_swaps(game.deck)
+				elif event.key == pygame.K_c:
+					game.player.check_hand()
 
 	def run(self, game:Game):
 		while True:
