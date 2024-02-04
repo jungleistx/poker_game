@@ -13,38 +13,37 @@ class Hand():
 			self.ranks[card.rank] += 1
 			self.suits[card.suit] += 1
 
-	@classmethod
 	def check_hand(self, cards:list):
 		self.cards = cards
-		self.count_cards(self)
-		if self.check_royal_flush(self):
+		self.count_cards()
+		if self.check_royal_flush():
 			return f"You got a royal flush!"
-		elif self.check_straight_flush(self):
+		elif self.check_straight_flush():
 			return f"You got a straight flush!"
-		elif self.check_same_of_a_kind(self, 4):
+		elif self.check_same_of_a_kind(4):
 			return f"You got four-of-a-kind!"
-		elif self.check_same_of_a_kind(self, 3) and self.check_same_of_a_kind(self, 2):
+		elif self.check_same_of_a_kind(3) and self.check_same_of_a_kind(2):
 			return f"You got a full house!"
-		elif self.check_flush(self):
+		elif self.check_flush():
 			return f"You got a flush!"
-		elif self.check_straight(self):
+		elif self.check_straight():
 			return f"You got a straight!"
-		elif self.check_same_of_a_kind(self, 3):
+		elif self.check_same_of_a_kind(3):
 			return f"You got three-of-a-kind!"
-		elif self.check_pairs(self, 2):
+		elif self.check_pairs(2):
 			return f"You got 2 pairs!"
-		elif self.check_pairs(self, 1):
+		elif self.check_pairs(1):
 			return f"You got a pair!"
 		else:
 			return f"You got {self.cards[4].rank} high!"
 
 	def check_royal_flush(self):
-		if self.check_flush(self) and self.check_straight(self) and self.cards[4].rank == 'A':
+		if self.check_flush() and self.check_straight() and self.cards[4].rank == 'A':
 			return True
 		return False
 
 	def check_straight_flush(self):
-		if self.check_flush(self) and self.check_straight(self):
+		if self.check_flush() and self.check_straight():
 			return True
 		return False
 
