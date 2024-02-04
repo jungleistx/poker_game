@@ -302,6 +302,12 @@ class GameWindow:
 			card.image.set_current_rect()
 			x += card_gap + card_width
 
+	def check_event_keys(self, event, game:Game):
+		if event.key == pygame.K_s:
+			game.player.check_swaps(game.deck)
+		elif event.key == pygame.K_c:
+			game.player.check_hand()
+
 	def check_events(self, game:Game):
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -313,10 +319,7 @@ class GameWindow:
 					self.check_mouseclick_cards(game)
 					self.check_mouseclick_buttons(game)
 			if event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_s:
-					game.player.check_swaps(game.deck)
-				elif event.key == pygame.K_c:
-					game.player.check_hand()
+				self.check_event_keys(event, game)
 
 	def run(self, game:Game):
 		while True:
