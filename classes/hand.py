@@ -5,7 +5,7 @@ class Hand():
 	def __init__(self, deck:Deck):
 		self.cards = deck.deal_cards(5)
 
-	def count_cards(self):
+	def count_card_types(self):
 		self.ranks = {rank: 0 for rank in ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']}
 		self.suits = {suit: 0 for suit in ['Hearts', 'Diamonds', 'Clubs', 'Spades']}
 
@@ -14,7 +14,7 @@ class Hand():
 			self.suits[card.suit] += 1
 
 	def check_hand(self):
-		self.count_cards()
+		self.count_card_types()
 		if self.check_royal_flush():
 			return f"You got a royal flush!"
 		elif self.check_straight_flush():
