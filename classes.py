@@ -6,6 +6,9 @@ CARD_HEIGHT = 300
 class GameWindow:
 	pass
 
+class Game:
+	pass
+
 class Image():
 	def __init__(self, path:str, x:int=0, y:int=0):
 		self.image = pygame.image.load(path)
@@ -155,7 +158,7 @@ class Player:
 		new_cards = deck.deal_cards(amount)
 		self.hand.extend(new_cards)
 
-	def check_swaps(self, deck:Deck):
+	def check_swaps(self, game:Game):
 		swap_amount = 0
 		swapping = True
 		while swapping:
@@ -166,7 +169,8 @@ class Player:
 					self.hand.remove(card)
 					swapping = True
 		if swap_amount:
-			self.deal_new_cards(swap_amount, deck)
+			self.deal_new_cards(swap_amount, game.deck)
+			game.swap_used = True
 		self.sort_hand()
 
 	def swapping_cards(self, deck:Deck):
@@ -213,6 +217,7 @@ class Game:
 	def __init__(self, player:Player):
 		self.player = player
 		self.deck = Deck()
+		self.swap_used = False
 
 	def start_game(self):
 		self.deck.reset_deck()
@@ -281,7 +286,10 @@ class GameWindow:
 		mouse_pos = pygame.mouse.get_pos()
 		self.swap.update_coordinates()
 		if self.swap.image.is_clicked(mouse_pos):
-			game.player.check_swaps(game.deck)
+			if not game.swap_used:
+				game.player.check_swaps(game)
+			else:
+				print('Swap used!')
 		elif self.submit.image.is_clicked(mouse_pos):
 			game.player.check_hand()
 
@@ -304,8 +312,11 @@ class GameWindow:
 
 	def check_event_keys(self, event, game:Game):
 		if event.key == pygame.K_s:
-			game.player.check_swaps(game.deck)
-		elif event.key == pygame.K_c:
+			if not game.swap_used:
+				game.player.check_swaps(game)
+			else:
+				print('Swap used!')
+		if event.key == pygame.K_c:
 			game.player.check_hand()
 
 	def check_events(self, game:Game):
