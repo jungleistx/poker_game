@@ -13,8 +13,7 @@ class Hand():
 			self.ranks[card.rank] += 1
 			self.suits[card.suit] += 1
 
-	def check_hand(self, cards:list):
-		self.cards = cards
+	def check_hand(self):
 		self.count_cards()
 		if self.check_royal_flush():
 			return f"You got a royal flush!"
