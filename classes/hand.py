@@ -1,7 +1,9 @@
+from classes.deck import Deck
 
-class Hand(Card):
-	def __init__(self, cards:list):
-		super().__init__('', '')
+
+class Hand():
+	def __init__(self, deck:Deck):
+		self.cards = deck.deal_cards(5)
 
 	def count_cards(self):
 		self.ranks = {rank: 0 for rank in ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']}
