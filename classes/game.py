@@ -14,9 +14,6 @@ class Game:
 		Game.nr_of_players += 1
 		return Player()
 
-	def start_game(self):
+	def reset_deck(self):
 		self.deck.reset_deck()
-		window = GameWindow()
 		self.player.hand = self.deck.deal_cards(5)
-		self.player.check_hand()
-		window.run(self)
