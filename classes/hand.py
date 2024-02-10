@@ -32,7 +32,7 @@ class Hand():
 		elif self.check_pairs(2):
 			return f"You got 2 pairs!", 3
 		elif self.check_pairs(1):
-			return f"You got a pair!", 2
+			return f"You got a pair!", 1
 		else:
 			return f"You got {self.cards[4].rank} high!", 0
 
