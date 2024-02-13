@@ -8,12 +8,18 @@ class Hand():
 	def count_card_types(self):
 		self.ranks = {rank: 0 for rank in ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']}
 		self.suits = {suit: 0 for suit in ['Hearts', 'Diamonds', 'Clubs', 'Spades']}
-
 		for card in self.cards:
 			self.ranks[card.rank] += 1
 			self.suits[card.suit] += 1
 
+	def sort_hand(self):
+		 def rank_value(card):
+			rank_order = {'2': 0, '3': 1, '4': 2, '5': 3, '6': 4, '7': 5, '8': 6, '9': 7, 'T': 8, 'J': 9, 'Q': 10, 'K': 11, 'A': 12}
+			return rank_order.get(card.rank, 0)
+		self.cards.sort(key=lambda card: (rank_value(card), card.suit))
+
 	def check_hand(self):
+		self.sort_hand()
 		self.count_card_types()
 		if self.check_royal_flush():
 			return f"You got a royal flush!", 500
