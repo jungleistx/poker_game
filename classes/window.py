@@ -5,19 +5,19 @@ from main import pygame_instance
 
 
 class Window:
-	height = 680
-	width = 1100
+	HEIGHT = 680
+	WIDTH = 1100
 
 	def __init__(self):
 		pygame_instance.display.set_caption('Poker Game')
-		self.window = pygame_instance.display.set_mode((Window.width, Window.height))
+		self.window = pygame_instance.display.set_mode((Window.WIDTH, Window.HEIGHT))
 		self.__set_background()
 		self.__set_buttons()
 		self.game = Game()
 
 	def __set_background(self):
 		self.background = Image('img/background/poker_table.jpg')
-		self.background.image = pygame_instance.transform.scale(self.background.image, (Window.width, Window.height))
+		self.background.image = pygame_instance.transform.scale(self.background.image, (Window.WIDTH, Window.HEIGHT))
 
 	def __set_buttons(self):
 		swap_button_location = (350, 535, 358, 556)
