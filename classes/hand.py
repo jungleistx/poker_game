@@ -27,25 +27,25 @@ class Hand():
 		self.sort_hand()
 		self.count_card_types()
 		if self.check_royal_flush():
-			return f"You got a royal flush!", 500
+			return f"Royal flush", 500
 		elif self.check_straight_flush():
-			return f"You got a straight flush!", 100
+			return f"Straight flush", 100
 		elif self.check_same_of_a_kind(4):
-			return f"You got four-of-a-kind!", 50
+			return f"Four-of-a-kind", 50
 		elif self.check_same_of_a_kind(3) and self.check_same_of_a_kind(2):
-			return f"You got a full house!", 15
+			return f"Full house", 15
 		elif self.check_flush():
-			return f"You got a flush!", 10
+			return f"Flush", 10
 		elif self.check_straight():
-			return f"You got a straight!", 6
+			return f"Straight", 6
 		elif self.check_same_of_a_kind(3):
-			return f"You got three-of-a-kind!", 4
+			return f"Three-of-a-kind", 4
 		elif self.check_pairs(2):
-			return f"You got 2 pairs!", 3
+			return f"2 pairs", 3
 		elif self.check_pairs(1):
-			return f"You got a pair!", 1
+			return f"Pair", 1
 		else:
-			return f"You got {self.cards[4].rank} high!", 0
+			return f"{self.cards[4].rank} high", 0
 
 	def check_royal_flush(self):
 		if self.check_flush() and self.check_straight() and self.cards[4].rank == 'A':
