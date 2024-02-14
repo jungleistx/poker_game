@@ -1,9 +1,10 @@
-import pygame
+from main import pygame_instance
 
 
 class Image():
-	def __init__(self, path:str, pygame, x:int=0, y:int=0):
-		self.image = pygame.image.load(path)
+	def __init__(self, path:str, x:int=0, y:int=0):
+		self.image = pygame_instance.image.load(path)
+		self.__image_path = path
 		self.x = x
 		self.y = y
 		self.width = self.image.get_width()
