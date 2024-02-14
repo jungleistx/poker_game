@@ -4,8 +4,7 @@ from classes.deck import Deck
 class Hand():
 	def __init__(self, deck:Deck):
 		self._deck = deck
-		self.cards = []
-		self.get_new_cards(5)
+		self.reset_hand()
 
 	def count_card_types(self):
 		self.ranks = {rank: 0 for rank in ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']}
@@ -30,6 +29,7 @@ class Hand():
 	def reset_hand(self):
 		self.cards = []
 		self.get_new_cards(5)
+		self.sort_hand()
 
 	def get_new_cards(self, amount:int):
 		new_cards = self._deck.deal_cards(amount)
