@@ -20,10 +20,11 @@ class Window:
 		self.background.image = pygame_instance.transform.scale(self.background.image, (Window.WIDTH, Window.HEIGHT))
 
 	def __set_buttons(self):
-		swap_button_location = (350, 535, 358, 556)
-		submit_button_location = (580, 535, 604, 556)
-		self.swap = Button('Swap cards', swap_button_location)
-		self.submit = Button('Continue', submit_button_location)
+		swap_x, swap_y, swap_text_x, swap_text_y = 350, 535, 358, 556
+		submit_x, submit_y, submit_text_x, submit_text_y = 580, 535, 604, 556
+
+		self.swap = Button('Swap cards', swap_x, swap_y, swap_text_x, swap_text_y)
+		self.submit = Button('Continue', submit_x, submit_y, submit_text_x, submit_text_y)
 
 	def check_mouseclick_cards(self):
 		mouse_pos = pygame_instance.mouse.get_pos()
