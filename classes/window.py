@@ -52,7 +52,7 @@ class Window:
 
 	def draw_cards(self):
 		for card in self.game.player.hand:
-			card.image.draw_image(self)
+			card.image.draw_image(self.window)
 
 	def set_card_locations(self):
 		card_width = 140
@@ -90,10 +90,10 @@ class Window:
 		# new game
 
 		while True:
-			self.background.draw_image(self)
-			self.set_card_locations(self.game)
-			self.check_events(self.game)
-			self.draw_cards(self.game)
+			self.background.draw_image(self.window)
+			self.set_card_locations()
+			self.check_events()
+			self.draw_cards()
 			self.draw_buttons()
 
 			pygame_instance.display.flip()
