@@ -88,3 +88,18 @@ class Hand():
 		if amount in self.ranks.values():
 			return True
 		return False
+
+	def __iter__(self):
+		self.n = 0
+		return self
+
+	def __next__(self):
+		if self.n < len(self.cards):
+			card = self.cards(self.n)
+			self.n += 1
+			return card
+		else:
+			raise StopIteration
+
+	def __str__(self):
+		return f"Hand:\n{', '.join(map(str, self.cards))}"
