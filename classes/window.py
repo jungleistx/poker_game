@@ -25,6 +25,8 @@ class Window:
 
 		self.swap = Button('Swap cards', swap_x, swap_y, swap_text_x, swap_text_y)
 		self.submit = Button('Continue', submit_x, submit_y, submit_text_x, submit_text_y)
+		self.swap.update_coordinates()
+		self.submit.update_coordinates()
 
 	def check_mouseclick_cards(self):
 		mouse_pos = pygame_instance.mouse.get_pos()
@@ -38,7 +40,8 @@ class Window:
 
 	def check_mouseclick_buttons(self):
 		mouse_pos = pygame_instance.mouse.get_pos()
-		self.swap.update_coordinates()
+		# self.swap.update_coordinates()
+		# self.submit.update_coordinates()
 		if self.swap.image.is_clicked(mouse_pos):
 			if not self.game.swap_used:
 				self.game.player.check_swaps(self.game)
