@@ -15,6 +15,9 @@ class Player:
 	def check_swaps(self):
 		return self.hand.check_swaps()
 
+	def reset_card_positions(self):
+		self.hand.reset_card_positions()
+
 	def __str__(self):
 		return f"{self.hand}"
 

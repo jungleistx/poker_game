@@ -1,4 +1,5 @@
 from classes.deck import Deck
+from classes.card import Card
 
 
 class Hand():
@@ -30,6 +31,12 @@ class Hand():
 		self.cards = []
 		self.get_new_cards(5)
 		self.sort_hand()
+
+	def reset_card_positions(self):
+		for card in self.cards:
+			card.image.y = Card.card_height
+			card.swapping = False
+			card.image.set_current_rect()
 
 	def get_new_cards(self, amount:int):
 		new_cards = self._deck.deal_cards(amount)
