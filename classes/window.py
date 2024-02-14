@@ -88,15 +88,15 @@ class Window:
 			if event.type == pygame.KEYDOWN:
 				self.check_event_keys(event)
 
-	def run(self, game:Game):
+	def run(self):
 		# intro screen
 		# new game
 
 		while True:
 			self.background.draw_image(self)
-			self.set_card_locations(game)
-			self.check_events(game)
-			self.draw_cards(game)
+			self.set_card_locations(self.game)
+			self.check_events(self.game)
+			self.draw_cards(self.game)
 			self.draw_buttons()
 
 			pygame.display.flip()
