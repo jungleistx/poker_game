@@ -6,20 +6,20 @@ from classes.game import Game
 import pygame
 
 
-class GameWindow:
+class Window:
 	height = 680
 	width = 1100
 
 	def __init__(self):
 		pygame.init()
 		pygame.display.set_caption('Poker Game')
-		self.window = pygame.display.set_mode((GameWindow.width, GameWindow.height))
+		self.window = pygame.display.set_mode((Window.width, Window.height))
 		self.__set_background()
 		self.__set_buttons()
 
 	def __set_background(self):
 		self.background = Image('img/background/poker_table.jpg')
-		self.background.image = pygame.transform.scale(self.background.image, (GameWindow.width, GameWindow.height))
+		self.background.image = pygame.transform.scale(self.background.image, (Window.width, Window.height))
 
 	def __set_buttons(self):
 		swap_button_location = (350, 535, 358, 556)
