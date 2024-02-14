@@ -1,9 +1,7 @@
 from classes.image import Image
 from classes.button import Button
 from classes.game import Game
-
-# from classes.card import Card
-import pygame
+from main import pygame_instance
 
 
 class Window:
@@ -11,9 +9,9 @@ class Window:
 	width = 1100
 
 	def __init__(self):
-		pygame.init()
-		pygame.display.set_caption('Poker Game')
-		self.window = pygame.display.set_mode((Window.width, Window.height))
+		# self.pygame = pygame_instance
+		pygame_instance.display.set_caption('Poker Game')
+		self.window = pygame_instance.display.set_mode((Window.width, Window.height))
 		self.__set_background()
 		self.__set_buttons()
 		self.game = Game()
