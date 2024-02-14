@@ -1,7 +1,7 @@
 from classes.image import Image
 from classes.button import Button
 from classes.game import Game
-from main import pygame_instance
+from pygame_manager import pygame_instance
 
 
 class Window:
