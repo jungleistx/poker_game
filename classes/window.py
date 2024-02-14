@@ -9,7 +9,6 @@ class Window:
 	width = 1100
 
 	def __init__(self):
-		# self.pygame = pygame_instance
 		pygame_instance.display.set_caption('Poker Game')
 		self.window = pygame_instance.display.set_mode((Window.width, Window.height))
 		self.__set_background()
