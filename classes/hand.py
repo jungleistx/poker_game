@@ -4,6 +4,7 @@ from classes.deck import Deck
 class Hand():
 	def __init__(self, deck:Deck):
 		self._deck = deck
+		self.cards = []
 		self.cards = self.deal_new_cards(5)
 
 	def count_card_types(self):
@@ -12,6 +13,10 @@ class Hand():
 		for card in self.cards:
 			self.ranks[card.rank] += 1
 			self.suits[card.suit] += 1
+
+	def reset_hand(self):
+		self.cards = []
+		self.deal_new_cards(5)
 
 	def deal_new_cards(self, amount:int):
 		new_cards = self._deck.deal_cards(amount)
