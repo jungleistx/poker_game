@@ -17,17 +17,17 @@ class Window:
 		self.game = Game()
 
 	def __set_background(self):
-		self.background = Image('img/background/poker_table.jpg', pygame)
-		self.background.image = pygame.transform.scale(self.background.image, (Window.width, Window.height))
+		self.background = Image('img/background/poker_table.jpg')
+		self.background.image = pygame_instance.transform.scale(self.background.image, (Window.width, Window.height))
 
 	def __set_buttons(self):
 		swap_button_location = (350, 535, 358, 556)
 		submit_button_location = (580, 535, 604, 556)
-		self.swap = Button('Swap cards', pygame, swap_button_location)
-		self.submit = Button('Continue', pygame, submit_button_location)
+		self.swap = Button('Swap cards', swap_button_location)
+		self.submit = Button('Continue', submit_button_location)
 
 	def check_mouseclick_cards(self):
-		mouse_pos = pygame.mouse.get_pos()
+		mouse_pos = pygame_instance.mouse.get_pos()
 		for card in self.game.player.hand:
 			if card.image.is_clicked(mouse_pos) and card.swapping == False:
 				card.image.y -= 50
@@ -37,7 +37,7 @@ class Window:
 				card.image.y += 50
 
 	def check_mouseclick_buttons(self):
-		mouse_pos = pygame.mouse.get_pos()
+		mouse_pos = pygame_instance.mouse.get_pos()
 		self.swap.update_coordinates()
 		if self.swap.image.is_clicked(mouse_pos):
 			if not self.game.swap_used:
@@ -65,25 +65,25 @@ class Window:
 			x += card_gap + card_width
 
 	def check_event_keys(self, event):
-		if event.key == pygame.K_s:
+		if event.key == pygame_instance.K_s:
 			if not self.game.swap_used:
 				self.game.player.check_swaps(self.game)
 			else:
 				print('Swap used!')
-		if event.key == pygame.K_c:
+		if event.key == pygame_instance.K_c:
 			self.game.player.check_hand()
 
 	def check_events(self):
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
+		for event in pygame_instance.event.get():
+			if event.type == pygame_instance.QUIT:
 				print('Thank you come again!')
-				pygame.quit()
+				pygame_instance.quit()
 				exit()
-			if event.type == pygame.MOUSEBUTTONDOWN:
+			if event.type == pygame_instance.MOUSEBUTTONDOWN:
 				if event.button == 1:
 					self.check_mouseclick_cards()
 					self.check_mouseclick_buttons()
-			if event.type == pygame.KEYDOWN:
+			if event.type == pygame_instance.KEYDOWN:
 				self.check_event_keys(event)
 
 	def run(self):
@@ -97,5 +97,5 @@ class Window:
 			self.draw_cards(self.game)
 			self.draw_buttons()
 
-			pygame.display.flip()
+			pygame_instance.display.flip()
 			# pygame.time.delay(200)
