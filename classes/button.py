@@ -7,7 +7,7 @@ class Button:
 
 	def __init__(self, text:str, pygame, x:int=0, y:int=0, b_x:int=0, b_y:int=0):
 		self.text = text
-		self.image = Image('img/button/button.png', x, y)
+		self.image = Image('img/button/button.png', pygame, x, y)
 		self.image.image = pygame.transform.scale(self.image.image, (Button.BUTTON_WIDTH, Button.BUTTON_HEIGHT))
 		self.game_font = pygame.font.SysFont('chalkboard', 28)
 		self.text_x = b_x
