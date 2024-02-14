@@ -1,4 +1,4 @@
-from main import pygame_instance
+from pygame_manager import pygame_instance
 
 
 class Image():

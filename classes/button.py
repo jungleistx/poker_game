@@ -1,5 +1,5 @@
 from classes.image import Image
-from main import pygame_instance
+from pygame_manager import pygame_instance
 
 
 class Button:
