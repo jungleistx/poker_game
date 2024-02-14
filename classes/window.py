@@ -19,14 +19,14 @@ class Window:
 		self.game = Game()
 
 	def __set_background(self):
-		self.background = Image('img/background/poker_table.jpg')
+		self.background = Image('img/background/poker_table.jpg', pygame)
 		self.background.image = pygame.transform.scale(self.background.image, (Window.width, Window.height))
 
 	def __set_buttons(self):
 		swap_button_location = (350, 535, 358, 556)
 		submit_button_location = (580, 535, 604, 556)
-		self.swap = Button('Swap cards', swap_button_location)
-		self.submit = Button('Continue', submit_button_location)
+		self.swap = Button('Swap cards', pygame, swap_button_location)
+		self.submit = Button('Continue', pygame, submit_button_location)
 
 	def check_mouseclick_cards(self):
 		mouse_pos = pygame.mouse.get_pos()
