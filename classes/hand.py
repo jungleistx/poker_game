@@ -5,7 +5,7 @@ class Hand():
 	def __init__(self, deck:Deck):
 		self._deck = deck
 		self.cards = []
-		self.cards = self.deal_new_cards(5)
+		self.get_new_cards(5)
 
 	def count_card_types(self):
 		self.ranks = {rank: 0 for rank in ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']}
@@ -16,9 +16,9 @@ class Hand():
 
 	def reset_hand(self):
 		self.cards = []
-		self.deal_new_cards(5)
+		self.get_new_cards(5)
 
-	def deal_new_cards(self, amount:int):
+	def get_new_cards(self, amount:int):
 		new_cards = self._deck.deal_cards(amount)
 		self.cards.extend(new_cards)
 
@@ -95,7 +95,7 @@ class Hand():
 
 	def __next__(self):
 		if self.n < len(self.cards):
-			card = self.cards(self.n)
+			card = self.cards[self.n]
 			self.n += 1
 			return card
 		else:
