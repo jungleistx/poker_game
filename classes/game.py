@@ -12,8 +12,8 @@ class Game:
 
 	def add_player(self) -> Player:
 		Game.nr_of_players += 1
-		return Player()
+		return Player(self.deck)
 
 	def reset_deck(self):
 		self.deck.reset_deck()
-		self.player.hand = self.deck.deal_cards(5)
+		self.player.reset_hand()
