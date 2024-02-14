@@ -90,6 +90,8 @@ class Window:
 		# intro screen
 		# new game
 
+		clock = pygame_instance.time.Clock()
+
 		while True:
 			self.background.draw_image(self.window)
 			self.set_card_locations()
@@ -99,3 +101,4 @@ class Window:
 
 			pygame_instance.display.flip()
 			# pygame.time.delay(200)
+			clock.tick(60)
