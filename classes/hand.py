@@ -14,6 +14,19 @@ class Hand():
 			self.ranks[card.rank] += 1
 			self.suits[card.suit] += 1
 
+	def check_swaps(self) -> bool:
+		swap_amount = 0
+		for card in self.cards:
+			if card.swapping:
+				swap_amount += 1
+		if swap_amount:
+			self.swap_cards(swap_amount)
+			return True
+		return False
+
+	def swap_cards(self, amount:int):
+		pass
+
 	def reset_hand(self):
 		self.cards = []
 		self.get_new_cards(5)

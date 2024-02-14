@@ -12,6 +12,9 @@ class Player:
 	def reset_hand(self):
 		self.hand.reset_hand()
 
+	def check_swaps(self):
+		return self.hand.check_swaps()
+
 	def __str__(self):
 		return f"{self.hand}"
 
