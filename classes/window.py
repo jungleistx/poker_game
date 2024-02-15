@@ -53,8 +53,14 @@ class Window:
 				self.game.player.reset_card_positions()
 
 		elif self.submit.image.is_clicked(mouse_pos):
-			best_hand, win_multiplier = self.game.player.check_hand()
-			print(best_hand, win_multiplier)
+			self.continue_button()
+
+
+	def continue_button(self):
+		self.game.player.reset_card_positions()
+		best_hand, win_multiplier = self.game.player.check_hand()
+		print(best_hand, win_multiplier)
+
 
 	def draw_buttons(self):
 		self.swap.draw_button(self.window)
