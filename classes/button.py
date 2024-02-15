@@ -22,5 +22,5 @@ class Button:
 		self.draw_text(window)
 
 	def draw_text(self, window):
-		text = game_font.render(self.text, True, (255, 0, 0))
+		text = game_font.render(self.text, True, (2, 36, 8))
 		window.blit(text, (self.text_x,self.text_y))
