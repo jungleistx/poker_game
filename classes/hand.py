@@ -25,7 +25,19 @@ class Hand():
 		return False
 
 	def swap_cards(self, amount:int):
-		pass
+		positions_of_swaps = []
+		for card in self.cards:
+			if card.swapping:
+				card_index = self.cards.index(card)
+				positions_of_swaps.append(card_index)
+		if positions_of_swaps:
+			for pos in positions_of_swaps:
+				new_card_list = self.get_new_cards(1)
+				print(len(new_card_list), type(new_card_list))
+				new_card = new_card_list[0]
+				card_to_remove = self.cards[pos]
+				self.cards.insert(pos, new_card)
+				self.cards.remove(card_to_remove)
 
 	def reset_hand(self):
 		self.cards = []
