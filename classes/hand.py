@@ -72,6 +72,21 @@ class Hand():
 							self.cards.insert(0, card)
 					break
 
+		if winning_hand == 'Full house':
+			for card in self.cards:
+				if self.ranks[card.rank] == 3:
+					three_of_a_kind = card.rank
+				elif self.ranks[card.rank] == 2:
+					two_of_a_kind = card.rank
+			for card in self.cards[:]:
+				if card.rank == three_of_a_kind:
+					self.cards.remove(card)
+					self.cards.insert(0, card)
+			for card in self.cards[:]:
+				if card.rank == two_of_a_kind:
+					self.cards.remove(card)
+					self.cards.insert(3, card)
+
 		if winning_hand == 'Pair':
 			for card in self.cards:
 				if self.ranks[card.rank] == 2:
