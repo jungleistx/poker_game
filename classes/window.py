@@ -151,6 +151,11 @@ class Window:
 				self.check_event_keys(event)
 
 
+	def new_game(self):
+		self.game.reset_deck()
+		self.run()
+
+
 	def run(self):
 		# intro screen
 		# new game
