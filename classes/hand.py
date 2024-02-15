@@ -58,6 +58,20 @@ class Hand():
 			return rank_order.get(card.rank, 0)
 		self.cards.sort(key=lambda card: (rank_value(card), card.suit), reverse=True)
 
+
+	def sort_by_winning_hand(self):
+		winning_hand, bet_multiplier = self.check_hand()
+
+		if winning_hand == 'Four-of-a-kind':
+			for card in self.cards:
+				if self.ranks[card.rank] == 4:
+					rank_to_sort = card.rank
+					for card in self.cards[:]:
+						if card.rank == rank_to_sort:
+							self.cards.remove(card)
+							self.cards.insert(0, card)
+					break
+
 	def check_hand(self):
 		self.sort_hand()
 		self.count_card_types()
