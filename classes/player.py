@@ -18,6 +18,9 @@ class Player:
 	def reset_card_positions(self):
 		self.hand.reset_card_positions()
 
+	def sort_hand(self):
+		self.hand.sort_hand()
+
 	def __str__(self):
 		return f"{self.hand}"
 
