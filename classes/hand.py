@@ -46,7 +46,7 @@ class Hand():
 		def rank_value(card):
 			rank_order = {'2': 0, '3': 1, '4': 2, '5': 3, '6': 4, '7': 5, '8': 6, '9': 7, 'T': 8, 'J': 9, 'Q': 10, 'K': 11, 'A': 12}
 			return rank_order.get(card.rank, 0)
-		self.cards.sort(key=lambda card: (rank_value(card), card.suit))
+		self.cards.sort(key=lambda card: (rank_value(card), card.suit), reverse=True)
 
 	def check_hand(self):
 		self.sort_hand()
