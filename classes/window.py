@@ -81,14 +81,15 @@ class Window:
 			card.image.set_current_rect()
 			x += card_gap + card_width
 
+
 	def check_event_keys(self, event):
 		if event.key == pygame_instance.K_s:
 			if not self.game.swap_used:
 				self.game.player.check_swaps(self.game)
 			else:
-				print('Swap used!')
-		if event.key == pygame_instance.K_c:
-			self.game.player.check_hand()
+				self.game.player.reset_card_positions()
+		elif event.key == pygame_instance.K_c:
+			self.continue_button()
 
 	def check_events(self):
 		for event in pygame_instance.event.get():
