@@ -7,7 +7,7 @@ class Player:
 		self.hand = Hand(deck)
 
 	def check_hand(self):
-		self.hand.check_hand()
+		return self.hand.check_hand()
 
 	def reset_hand(self):
 		self.hand.reset_hand()
