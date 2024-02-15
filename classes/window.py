@@ -75,9 +75,25 @@ class Window:
 		text_box_height = text_box.get_height()
 
 		result_button = Button(win_text)
-
+		result_button.image.image = pygame_instance.transform.scale(result_button.image.image, (text_box_width + 60, text_box_height + 30))
+		result_button.image.x = Window.WIDTH // 2 - text_box_width // 2 - 30
+		result_button.text_x = result_button.image.x + 30
+		result_button.image.y = 125
+		result_button.text_y = result_button.image.y + 15
 
 		result_button.draw_button(self.window)
+		self.draw_cards()
+		# add instruction for space bar (newgame)
+		pygame_instance.display.flip()
+
+		while True:
+			for event in pygame_instance.event.get():
+				if event.type == pygame_instance.QUIT:
+					pygame_instance.quit()
+					exit()
+				elif event.type == pygame_instance.KEYDOWN:
+					if event.key == pygame_instance.K_SPACE:
+						self.new_game()
 
 
 	def draw_buttons(self):
