@@ -8,6 +8,7 @@ class Window:
 	HEIGHT = 680
 	WIDTH = 1100
 
+
 	def __init__(self):
 		pygame_instance.display.set_caption('Poker Game')
 		self.window = pygame_instance.display.set_mode((Window.WIDTH, Window.HEIGHT))
@@ -15,9 +16,11 @@ class Window:
 		self.__set_buttons()
 		self.game = Game()
 
+
 	def __set_background(self):
 		self.background = Image('img/background/poker_table.jpg')
 		self.background.image = pygame_instance.transform.scale(self.background.image, (Window.WIDTH, Window.HEIGHT))
+
 
 	def __set_buttons(self):
 		swap_x, swap_y, swap_text_x, swap_text_y = 350, 535, 358, 556
@@ -28,6 +31,7 @@ class Window:
 		self.swap.update_coordinates()
 		self.submit.update_coordinates()
 
+
 	def check_mouseclick_cards(self):
 		mouse_pos = pygame_instance.mouse.get_pos()
 		for card in self.game.player.hand:
@@ -37,6 +41,7 @@ class Window:
 			elif card.image.is_clicked(mouse_pos) and card.swapping == True:
 				card.swapping = False
 				card.image.y += 50
+
 
 	def check_mouseclick_buttons(self):
 		mouse_pos = pygame_instance.mouse.get_pos()
@@ -55,9 +60,11 @@ class Window:
 		self.swap.draw_button(self.window)
 		self.submit.draw_button(self.window)
 
+
 	def draw_cards(self):
 		for card in self.game.player.hand:
 			card.image.draw_image(self.window)
+
 
 	def set_card_locations(self):
 		card_width = 140
@@ -89,6 +96,7 @@ class Window:
 					self.check_mouseclick_buttons()
 			if event.type == pygame_instance.KEYDOWN:
 				self.check_event_keys(event)
+
 
 	def run(self):
 		# intro screen
