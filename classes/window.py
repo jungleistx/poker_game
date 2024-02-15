@@ -40,15 +40,16 @@ class Window:
 
 	def check_mouseclick_buttons(self):
 		mouse_pos = pygame_instance.mouse.get_pos()
-		# self.swap.update_coordinates()
-		# self.submit.update_coordinates()
 		if self.swap.image.is_clicked(mouse_pos):
-			if not self.game.swap_used:
-				self.game.player.check_swaps(self.game)
+			if not self.game.card_swap_used:
+				if self.game.player.swap_cards():
+					self.game.card_swap_used = True
 			else:
-				print('Swap used!')
+				self.game.player.reset_card_positions()
+
 		elif self.submit.image.is_clicked(mouse_pos):
-			self.game.player.check_hand()
+			best_hand, win_multiplier = self.game.player.check_hand()
+			print(best_hand, win_multiplier)
 
 	def draw_buttons(self):
 		self.swap.draw_button(self.window)
@@ -103,5 +104,5 @@ class Window:
 			self.draw_buttons()
 
 			pygame_instance.display.flip()
-			# pygame.time.delay(200)
+			# pygame_instance.time.delay(200)
 			clock.tick(60)
