@@ -1,5 +1,5 @@
 from classes.image import Image
-from pygame_manager import pygame_instance
+from pygame_manager import pygame_instance, game_font
 
 
 class Button:
@@ -10,7 +10,6 @@ class Button:
 		self.text = text
 		self.image = Image('img/button/button.png', x, y)
 		self.image.image = pygame_instance.transform.scale(self.image.image, (Button.WIDTH, Button.HEIGHT))
-		self.game_font = pygame_instance.font.SysFont('chalkboard', 28)
 		self.text_x = b_x
 		self.text_y = b_y
 
@@ -23,5 +22,5 @@ class Button:
 		self.draw_text(window)
 
 	def draw_text(self, window):
-		text = self.game_font.render(self.text, True, (255, 0, 0))
+		text = game_font.render(self.text, True, (255, 0, 0))
 		window.blit(text, (self.text_x,self.text_y))
