@@ -72,6 +72,16 @@ class Hand():
 							self.cards.insert(0, card)
 					break
 
+		if winning_hand == 'Pair':
+			for card in self.cards:
+				if self.ranks[card.rank] == 2:
+					rank_to_sort = card.rank
+					for card in self.cards[:]:
+						if card.rank == rank_to_sort:
+							self.cards.remove(card)
+							self.cards.insert(0, card)
+					break
+
 	def check_hand(self):
 		self.sort_hand()
 		self.count_card_types()
