@@ -90,6 +90,17 @@ class Window:
 				self.game.player.reset_card_positions()
 		elif event.key == pygame_instance.K_c:
 			self.continue_button()
+		elif event.key == pygame_instance.K_1:
+			self.game.player.move_card_with_key(1)
+		elif event.key == pygame_instance.K_2:
+			self.game.player.move_card_with_key(2)
+		elif event.key == pygame_instance.K_3:
+			self.game.player.move_card_with_key(3)
+		elif event.key == pygame_instance.K_4:
+			self.game.player.move_card_with_key(4)
+		elif event.key == pygame_instance.K_5:
+			self.game.player.move_card_with_key(5)
+
 
 	def check_events(self):
 		for event in pygame_instance.event.get():

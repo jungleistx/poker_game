@@ -69,6 +69,18 @@ class Hand():
 			card.image.set_current_rect()
 
 
+	def move_card_with_key(self, key:int):
+		pos = key - 1
+
+		if 0 <= pos <= 4:
+			if self.cards[pos].swapping:
+				self.cards[pos].image.y += 50
+				self.cards[pos].swapping = False
+			else:
+				self.cards[pos].image.y -= 50
+				self.cards[pos].swapping = True
+
+
 	def get_new_cards(self, amount:int):
 		new_cards = self._deck.deal_cards(amount)
 		return new_cards
