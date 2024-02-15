@@ -85,7 +85,7 @@ class Hand():
 		self.sort_hand_by_rank()
 		winning_hand, bet_multiplier = self.check_hand()
 
-		if winning_hand == 'Four-of-a-kind':
+		if bet_multiplier == Hand.FOUR_OF_A_KIND:
 			for card in self.cards:
 				if self.ranks[card.rank] == 4:
 					rank_to_sort = card.rank
@@ -95,7 +95,7 @@ class Hand():
 							self.cards.insert(0, card)
 					break
 
-		elif winning_hand == 'Full house':
+		elif bet_multiplier == Hand.FULL_HOUSE:
 			for card in self.cards:
 				if self.ranks[card.rank] == 3:
 					three_of_a_kind = card.rank
@@ -110,7 +110,7 @@ class Hand():
 					self.cards.remove(card)
 					self.cards.insert(3, card)
 
-		elif winning_hand == 'Three-of-a-kind':
+		elif bet_multiplier == Hand.THREE_OF_A_KIND:
 			for card in self.cards:
 				if self.ranks[card.rank] == 3:
 					three_of_a_kind = card.rank
@@ -120,7 +120,7 @@ class Hand():
 							self.cards.insert(0, card)
 					break
 
-		elif winning_hand == 'Two pairs':
+		elif bet_multiplier == Hand.TWO_PAIRS:
 			pair_ranks = []
 			for card in self.cards:
 				if self.ranks[card.rank] == 2 and card.rank not in pair_ranks:
@@ -133,7 +133,7 @@ class Hand():
 					self.cards.remove(card)
 					self.cards.insert(2, card)
 
-		elif winning_hand == 'Pair':
+		elif bet_multiplier == Hand.PAIR:
 			for card in self.cards:
 				if self.ranks[card.rank] == 2:
 					rank_to_sort = card.rank
@@ -147,25 +147,25 @@ class Hand():
 	def check_hand(self):
 		self.count_card_types()
 		if self.check_royal_flush():
-			return f"Royal flush", 500
+			return f"Royal flush", Hand.ROYAL_FLUSH
 		elif self.check_straight_flush():
-			return f"Straight flush", 100
+			return f"Straight flush - {self.cards[0]} high", Hand.STRAIGHT_FLUSH
 		elif self.check_same_of_a_kind(4):
-			return f"Four-of-a-kind", 50
+			return f"Four-of-a-kind - {self.cards[0].rank}'s", Hand.FOUR_OF_A_KIND
 		elif self.check_same_of_a_kind(3) and self.check_same_of_a_kind(2):
-			return f"Full house", 15
+			return f"Full house - {self.cards[0].rank}'s full of {self.cards[3].rank}", Hand.FULL_HOUSE
 		elif self.check_flush():
-			return f"Flush", 10
+			return f"Flush - {self.cards[0].rank} high", Hand.FLUSH
 		elif self.check_straight():
-			return f"Straight", 6
+			return f"Straight - {self.cards[0].rank} high", Hand.STRAIGHT
 		elif self.check_same_of_a_kind(3):
-			return f"Three-of-a-kind", 4
+			return f"Three-of-a-kind - {self.cards[0].rank}'s", Hand.THREE_OF_A_KIND
 		elif self.check_pairs(2):
-			return f"Two pairs", 3
+			return f"Two pairs - {self.cards[0].rank}'s and {self.cards[1].rank}'s", Hand.TWO_PAIRS
 		elif self.check_pairs(1):
-			return f"Pair", 1
+			return f"Pair - {self.cards[0].rank}'s", Hand.PAIR
 		else:
-			return f"{self.cards[0].rank} high", 0
+			return f"{self.cards[0].rank} high", Hand.HIGH
 
 
 	def check_royal_flush(self):
