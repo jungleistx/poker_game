@@ -3,6 +3,17 @@ from classes.card import Card
 
 
 class Hand():
+	ROYAL_FLUSH = 500
+	STRAIGHT_FLUSH = 100
+	FOUR_OF_A_KIND = 50
+	FULL_HOUSE = 15
+	FLUSH = 10
+	STRAIGHT = 6
+	THREE_OF_A_KIND = 4
+	TWO_PAIRS = 3
+	PAIR = 1
+	HIGH = 0
+
 	def __init__(self, deck:Deck):
 		self._deck = deck
 		self.reset_hand()
