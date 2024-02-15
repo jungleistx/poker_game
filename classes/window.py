@@ -85,7 +85,8 @@ class Window:
 	def check_event_keys(self, event):
 		if event.key == pygame_instance.K_s:
 			if not self.game.card_swap_used:
-				self.game.player.check_swaps(self.game)
+				if self.game.player.swap_cards():
+					self.game.card_swap_used = True
 			else:
 				self.game.player.reset_card_positions()
 		elif event.key == pygame_instance.K_c:
