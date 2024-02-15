@@ -15,27 +15,21 @@ class Hand():
 			self.suits[card.suit] += 1
 
 	def select_swaps(self) -> bool:
-		swap_amount = 0
+		self.swap_positions = []
 		for card in self.cards:
 			if card.swapping:
-				swap_amount += 1
-		if swap_amount:
-			self.swap_cards(swap_amount)
+				self.swap_positions.append(self.cards.index(card))
+		if self.swap_positions:
+			self.swap_cards()
 			return True
 		return False
 
-	def swap_cards(self, amount:int):
-		positions_of_swaps = []
-		for card in self.cards:
-			if card.swapping:
-				card_index = self.cards.index(card)
-				positions_of_swaps.append(card_index)
-		if positions_of_swaps:
-			for pos in positions_of_swaps:
-				new_card = self.get_new_cards(1)[0]
-				card_to_remove = self.cards[pos]
-				self.cards.insert(pos, new_card)
-				self.cards.remove(card_to_remove)
+	def swap_cards(self):
+		for pos in self.swap_positions:
+			new_card = self.get_new_cards(1)[0]
+			card_to_remove = self.cards[pos]
+			self.cards.insert(pos, new_card)
+			self.cards.remove(card_to_remove)
 
 	def reset_hand(self):
 		self.cards = []
