@@ -58,10 +58,10 @@ class Window:
 
 	def continue_button(self):
 		self.game.player.reset_card_positions()
-		self.draw_winning_text()
+		self.draw_endgame_screen()
 
 
-	def draw_winning_text(self):
+	def draw_endgame_screen(self):
 		best_hand, win_multiplier = self.game.player.check_hand()
 		# win_amount = self.game.player.bet * win_multiplier
 		win_amount = win_multiplier
