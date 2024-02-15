@@ -17,3 +17,4 @@ class Game:
 	def reset_deck(self):
 		self.deck.reset_deck()
 		self.player.reset_hand()
+		self.card_swap_used = False
