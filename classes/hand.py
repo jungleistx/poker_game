@@ -47,14 +47,14 @@ class Hand():
 		new_cards = self._deck.deal_cards(amount)
 		return new_cards
 
-	def sort_hand(self):
+	def sort_hand_by_rank(self):
 		def rank_value(card):
 			rank_order = {'2': 0, '3': 1, '4': 2, '5': 3, '6': 4, '7': 5, '8': 6, '9': 7, 'T': 8, 'J': 9, 'Q': 10, 'K': 11, 'A': 12}
 			return rank_order.get(card.rank, 0)
 		self.cards.sort(key=lambda card: (rank_value(card), card.suit), reverse=True)
 
 	def sort_by_winning_hand(self):
-		self.sort_hand()
+		self.sort_hand_by_rank()
 		winning_hand, bet_multiplier = self.check_hand()
 
 		if winning_hand == 'Four-of-a-kind':
