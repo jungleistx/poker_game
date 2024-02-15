@@ -58,8 +58,26 @@ class Window:
 
 	def continue_button(self):
 		self.game.player.reset_card_positions()
+		self.draw_winning_text()
+
+
+	def draw_winning_text(self):
 		best_hand, win_multiplier = self.game.player.check_hand()
-		print(best_hand, win_multiplier)
+		# win_amount = self.game.player.bet * win_multiplier
+		win_amount = win_multiplier
+		if win_amount > 0:
+			win_text = f"{best_hand}, you win {win_amount}!"
+		else:
+			win_text = f"{best_hand}, you get {win_amount}."
+
+		text_box = game_font.render(win_text, True, (2, 36, 8))
+		text_box_width = text_box.get_width()
+		text_box_height = text_box.get_height()
+
+		result_button = Button(win_text)
+
+
+		result_button.draw_button(self.window)
 
 
 	def draw_buttons(self):
