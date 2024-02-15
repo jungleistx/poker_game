@@ -53,6 +53,7 @@ class Hand():
 		self.cards.sort(key=lambda card: (rank_value(card), card.suit), reverse=True)
 
 	def sort_by_winning_hand(self):
+		self.sort_hand()
 		winning_hand, bet_multiplier = self.check_hand()
 
 		if winning_hand == 'Four-of-a-kind':
@@ -95,7 +96,6 @@ class Hand():
 			for card in self.cards:
 				if self.ranks[card.rank] == 2 and card.rank not in pair_ranks:
 					pair_ranks.append(card.rank)
-
 			for card in self.cards[:]:
 				if card.rank == max(pair_ranks):
 					self.cards.remove(card)
@@ -115,7 +115,6 @@ class Hand():
 					break
 
 	def check_hand(self):
-		self.sort_hand()
 		self.count_card_types()
 		if self.check_royal_flush():
 			return f"Royal flush", 500
