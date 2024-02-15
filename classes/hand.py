@@ -47,8 +47,7 @@ class Hand():
 
 
 	def reset_hand(self):
-		self.cards = []
-		self.cards.extend(self.get_new_cards(5))
+		self.cards = self.get_new_cards(5)
 		self.sort_by_winning_hand()
 
 
