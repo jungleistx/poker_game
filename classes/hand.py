@@ -32,9 +32,7 @@ class Hand():
 				positions_of_swaps.append(card_index)
 		if positions_of_swaps:
 			for pos in positions_of_swaps:
-				new_card_list = self.get_new_cards(1)
-				print(len(new_card_list), type(new_card_list))
-				new_card = new_card_list[0]
+				new_card = self.get_new_cards(1)[0]
 				card_to_remove = self.cards[pos]
 				self.cards.insert(pos, new_card)
 				self.cards.remove(card_to_remove)
