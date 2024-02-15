@@ -173,7 +173,7 @@ class Hand():
 		elif self.check_same_of_a_kind(3):
 			return f"Three-of-a-kind - {self.cards[0].rank}'s", Hand.THREE_OF_A_KIND
 		elif self.check_pairs(2):
-			return f"Two pairs - {self.cards[0].rank}'s and {self.cards[1].rank}'s", Hand.TWO_PAIRS
+			return f"Two pairs - {self.cards[0].rank}'s and {self.cards[2].rank}'s", Hand.TWO_PAIRS
 		elif self.check_pairs(1):
 			return f"Pair of {self.cards[0].rank}'s", Hand.PAIR
 		else:
