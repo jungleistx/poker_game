@@ -7,12 +7,14 @@ class Hand():
 		self._deck = deck
 		self.reset_hand()
 
+
 	def count_card_types(self):
 		self.ranks = {rank: 0 for rank in ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']}
 		self.suits = {suit: 0 for suit in ['Hearts', 'Diamonds', 'Clubs', 'Spades']}
 		for card in self.cards:
 			self.ranks[card.rank] += 1
 			self.suits[card.suit] += 1
+
 
 	def select_swaps(self) -> bool:
 		self.swap_card_info = []
@@ -29,6 +31,7 @@ class Hand():
 			return True
 		return False
 
+
 	def swap_cards(self):
 		for card_info in self.swap_card_info:
 			pos, x, y = card_info['pos'], card_info['x'], card_info['y']
@@ -42,10 +45,12 @@ class Hand():
 
 		self.sort_by_winning_hand()
 
+
 	def reset_hand(self):
 		self.cards = []
 		self.cards.extend(self.get_new_cards(5))
 		self.sort_by_winning_hand()
+
 
 	def reset_card_positions(self):
 		for card in self.cards:
@@ -53,15 +58,18 @@ class Hand():
 			card.swapping = False
 			card.image.set_current_rect()
 
+
 	def get_new_cards(self, amount:int):
 		new_cards = self._deck.deal_cards(amount)
 		return new_cards
+
 
 	def sort_hand_by_rank(self):
 		def rank_value(card):
 			rank_order = {'2': 0, '3': 1, '4': 2, '5': 3, '6': 4, '7': 5, '8': 6, '9': 7, 'T': 8, 'J': 9, 'Q': 10, 'K': 11, 'A': 12}
 			return rank_order.get(card.rank, 0)
 		self.cards.sort(key=lambda card: (rank_value(card), card.suit), reverse=True)
+
 
 	def sort_by_winning_hand(self):
 		self.sort_hand_by_rank()
@@ -125,6 +133,7 @@ class Hand():
 							self.cards.insert(0, card)
 					break
 
+
 	def check_hand(self):
 		self.count_card_types()
 		if self.check_royal_flush():
@@ -148,15 +157,18 @@ class Hand():
 		else:
 			return f"{self.cards[0].rank} high", 0
 
+
 	def check_royal_flush(self):
 		if self.check_flush() and self.check_straight() and self.cards[0].rank == 'A':
 			return True
 		return False
 
+
 	def check_straight_flush(self):
 		if self.check_flush() and self.check_straight():
 			return True
 		return False
+
 
 	def check_straight(self):
 		ranks_high = '23456789TJQKA'
@@ -171,23 +183,28 @@ class Hand():
 		else:
 			return False
 
+
 	def check_pairs(self, amount:int):
 		pairs = [rank for rank in self.ranks.values() if rank == 2]
 		return len(pairs) == amount
+
 
 	def check_flush(self):
 		if 5 in self.suits.values():
 			return True
 		return False
 
+
 	def check_same_of_a_kind(self, amount:int):
 		if amount in self.ranks.values():
 			return True
 		return False
 
+
 	def __iter__(self):
 		self.n = 0
 		return self
+
 
 	def __next__(self):
 		if self.n < len(self.cards):
@@ -196,6 +213,7 @@ class Hand():
 			return card
 		else:
 			raise StopIteration
+
 
 	def __str__(self):
 		return f"Hand:\n{', '.join(map(str, self.cards))}"
