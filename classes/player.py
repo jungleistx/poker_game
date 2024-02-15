@@ -19,7 +19,7 @@ class Player:
 		self.hand.reset_card_positions()
 
 	def sort_hand(self):
-		self.hand.sort_hand()
+		self.hand.sort_by_winning_hand()
 
 	def __str__(self):
 		return f"{self.hand}"
