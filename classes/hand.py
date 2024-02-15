@@ -80,10 +80,10 @@ class Hand():
 		elif self.check_pairs(1):
 			return f"Pair", 1
 		else:
-			return f"{self.cards[4].rank} high", 0
+			return f"{self.cards[0].rank} high", 0
 
 	def check_royal_flush(self):
-		if self.check_flush() and self.check_straight() and self.cards[4].rank == 'A':
+		if self.check_flush() and self.check_straight() and self.cards[0].rank == 'A':
 			return True
 		return False
 
