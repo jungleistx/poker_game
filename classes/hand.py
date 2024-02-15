@@ -58,7 +58,6 @@ class Hand():
 			return rank_order.get(card.rank, 0)
 		self.cards.sort(key=lambda card: (rank_value(card), card.suit), reverse=True)
 
-
 	def sort_by_winning_hand(self):
 		winning_hand, bet_multiplier = self.check_hand()
 
@@ -97,6 +96,20 @@ class Hand():
 							self.cards.insert(0, card)
 					break
 
+		elif winning_hand == 'Two pairs':
+			pair_ranks = []
+			for card in self.cards:
+				if self.ranks[card.rank] == 2 and card.rank not in pair_ranks:
+					pair_ranks.append(card.rank)
+
+			for card in self.cards[:]:
+				if card.rank == max(pair_ranks):
+					self.cards.remove(card)
+					self.cards.insert(0, card)
+				elif card.rank == min(pair_ranks):
+					self.cards.remove(card)
+					self.cards.insert(2, card)
+
 		elif winning_hand == 'Pair':
 			for card in self.cards:
 				if self.ranks[card.rank] == 2:
@@ -125,7 +138,7 @@ class Hand():
 		elif self.check_same_of_a_kind(3):
 			return f"Three-of-a-kind", 4
 		elif self.check_pairs(2):
-			return f"2 pairs", 3
+			return f"Two pairs", 3
 		elif self.check_pairs(1):
 			return f"Pair", 1
 		else:
