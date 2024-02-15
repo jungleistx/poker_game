@@ -175,7 +175,7 @@ class Hand():
 		elif self.check_pairs(2):
 			return f"Two pairs - {self.cards[0].rank}'s and {self.cards[1].rank}'s", Hand.TWO_PAIRS
 		elif self.check_pairs(1):
-			return f"Pair - {self.cards[0].rank}'s", Hand.PAIR
+			return f"Pair of {self.cards[0].rank}'s", Hand.PAIR
 		else:
 			return f"{self.cards[0].rank} high", Hand.HIGH
 
