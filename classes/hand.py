@@ -15,21 +15,31 @@ class Hand():
 			self.suits[card.suit] += 1
 
 	def select_swaps(self) -> bool:
-		self.swap_positions = []
+		self.swap_card_info = []
 		for card in self.cards:
 			if card.swapping:
-				self.swap_positions.append(self.cards.index(card))
-		if self.swap_positions:
+				card_info = {}
+				card_info['pos'] = self.cards.index(card)
+				card_info['x'] = card.image.x
+				card_info['y'] = Card.card_height
+				self.swap_card_info.append(card_info)
+
+		if self.swap_card_info:
 			self.swap_cards()
 			return True
 		return False
 
 	def swap_cards(self):
-		for pos in self.swap_positions:
+		for card_info in self.swap_card_info:
+			pos, x, y = card_info['pos'], card_info['x'], card_info['y']
+
 			new_card = self.get_new_cards(1)[0]
 			card_to_remove = self.cards[pos]
 			self.cards.insert(pos, new_card)
 			self.cards.remove(card_to_remove)
+			new_card.image.x = x
+			new_card.image.y = y
+
 		self.sort_by_winning_hand()
 
 	def reset_hand(self):
