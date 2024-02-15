@@ -1,12 +1,7 @@
-from classes import *
+from classes.window import Window
+import pygame_manager
 
-player = Player()
-game = Game(player)
 
+gamewindow = Window()
 while True:
-	game.start_game()
-
-	new_game = input("New hand? (y/n): ")
-	if new_game != 'y':
-		break
-
+	gamewindow.run()
