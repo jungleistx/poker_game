@@ -29,7 +29,7 @@ class Hand():
 
 	def reset_hand(self):
 		self.cards = []
-		self.get_new_cards(5)
+		self.cards.extend(self.get_new_cards(5))
 		self.sort_hand()
 
 	def reset_card_positions(self):
@@ -40,7 +40,7 @@ class Hand():
 
 	def get_new_cards(self, amount:int):
 		new_cards = self._deck.deal_cards(amount)
-		self.cards.extend(new_cards)
+		return new_cards
 
 	def sort_hand(self):
 		def rank_value(card):
