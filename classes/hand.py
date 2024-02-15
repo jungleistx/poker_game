@@ -30,6 +30,7 @@ class Hand():
 			card_to_remove = self.cards[pos]
 			self.cards.insert(pos, new_card)
 			self.cards.remove(card_to_remove)
+		self.sort_by_winning_hand()
 
 	def reset_hand(self):
 		self.cards = []
