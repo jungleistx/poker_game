@@ -67,12 +67,7 @@ class Window:
 	def draw_continue_instructions(self):
 		space_button = Button('Press SPACE to continue')
 		space_button.change_button_size()
-
-		# space_button.image.x = Window.WIDTH // 2 - text_box_width // 2 - 30
-		# space_button.text_x = space_button.image.x + 30
-		# space_button.image.y = 210
-		# space_button.text_y = space_button.image.y + 15
-
+		space_button.set_new_location(Window.WIDTH, 210)
 		space_button.draw_button(self.window)
 
 
@@ -98,13 +93,9 @@ class Window:
 
 		result_button = Button(win_text)
 		result_button.change_button_size()
-
-		# result_button.image.x = Window.WIDTH // 2 - text_box_width // 2 - 30
-		# result_button.text_x = result_button.image.x + 30
-		# result_button.image.y = 125
-		# result_button.text_y = result_button.image.y + 15
-
+		result_button.set_new_location(Window.WIDTH, 125)
 		result_button.draw_button(self.window)
+
 		self.draw_continue_instructions()
 		self.draw_cards()
 		pygame_instance.display.flip()

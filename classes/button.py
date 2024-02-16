@@ -33,9 +33,13 @@ class Button:
 
 	def change_button_size(self):
 		text_box = game_font.render(self.text, True, (Button.TEXT_COLOUR))
-		text_box_width = text_box.get_width()
-		text_box_height = text_box.get_height()
-		self.image.image = pygame_instance.transform.scale(self.image.image, (text_box_width + 60, text_box_height + 30))
+		self.text_box_width = text_box.get_width()
+		self.text_box_height = text_box.get_height()
+		self.image.image = pygame_instance.transform.scale(self.image.image, (self.text_box_width + 60, self.text_box_height + 30))
 
 
-
+	def set_new_location(self, window_width:int, y:int=0):
+		self.image.x = window_width // 2 - self.text_box_width // 2 - 30
+		self.text_x = self.image.x + 30
+		self.image.y = y
+		self.text_y = self.image.y + 15
