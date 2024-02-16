@@ -130,6 +130,8 @@ class Window:
 			self.continue_button()
 		elif event.key == pygame_instance.K_SPACE:
 			self.continue_button()
+		elif event.key == pygame_instance.K_q:
+			self.quit_and_exit()
 		elif event.key == pygame_instance.K_1:
 			self.game.player.move_card_with_key(1)
 		elif event.key == pygame_instance.K_2:
