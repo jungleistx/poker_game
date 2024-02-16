@@ -80,7 +80,7 @@ class Window:
 		space_button.draw_button(self.window)
 
 
-	def endgame_loop(self):
+	def wait_for_spacekey_loop(self):
 		while True:
 			for event in pygame_instance.event.get():
 				if event.type == pygame_instance.QUIT:
