@@ -105,6 +105,7 @@ class Window:
 
 
 	def draw_cards(self):
+		self.set_card_locations()
 		for card in self.game.player.hand:
 			card.image.draw_image(self.window)
 
