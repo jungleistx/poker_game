@@ -46,18 +46,21 @@ class Window:
 	def check_mouseclick_buttons(self):
 		mouse_pos = pygame_instance.mouse.get_pos()
 		if self.swap.image.is_clicked(mouse_pos):
-			if not self.game.card_swap_used:
-				if self.game.player.swap_cards():
-					self.game.card_swap_used = True
-			else:
-				self.game.player.reset_card_positions()
-
+			self.check_swaps()
 		elif self.submit.image.is_clicked(mouse_pos):
 			self.continue_button()
 
 
+	def check_swaps(self):
+		if not self.game.card_swap_used:
+			if self.game.player.swap_cards():
+				self.game.card_swap_used = True
+		else:
+			self.game.player.reset_card_positions()
+
+
 	def continue_button(self):
-		self.game.player.reset_card_positions()
+		self.check_swaps()
 		self.draw_endgame_screen()
 
 
@@ -118,11 +121,7 @@ class Window:
 
 	def check_event_keys(self, event):
 		if event.key == pygame_instance.K_s:
-			if not self.game.card_swap_used:
-				if self.game.player.swap_cards():
-					self.game.card_swap_used = True
-			else:
-				self.game.player.reset_card_positions()
+			self.check_swaps()
 		elif event.key == pygame_instance.K_c:
 			self.continue_button()
 		elif event.key == pygame_instance.K_SPACE:
