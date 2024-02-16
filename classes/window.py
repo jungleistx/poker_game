@@ -71,7 +71,7 @@ class Window:
 		space_button.draw_button(self.window)
 
 
-	def wait_for_spacekey_loop(self):
+	def wait_userinput_loop(self):
 		while True:
 			for event in pygame_instance.event.get():
 				if event.type == pygame_instance.QUIT:
@@ -99,7 +99,7 @@ class Window:
 		self.draw_continue_instructions()
 		self.draw_cards()
 		pygame_instance.display.flip()
-		self.wait_for_spacekey_loop()
+		self.wait_userinput_loop()
 
 
 	def draw_buttons(self):
