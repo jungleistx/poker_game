@@ -158,7 +158,6 @@ class Window:
 				self.check_event_keys(event)
 
 
-	def new_game(self):
 	def quit_and_exit(self):
 		pygame_instance.quit()
 		exit()
@@ -219,6 +218,10 @@ class Window:
 
 		pygame_instance.display.flip()
 		self.wait_userinput_loop()
+
+
+	def new_game(self):
+		self.intro_window()
 
 
 	def run(self):
