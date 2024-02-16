@@ -29,3 +29,13 @@ class Button:
 	def draw_text(self, window):
 		text = game_font.render(self.text, True, (Button.TEXT_COLOUR))
 		window.blit(text, (self.text_x,self.text_y))
+
+
+	def change_button_size(self):
+		text_box = game_font.render(self.text, True, (Button.TEXT_COLOUR))
+		text_box_width = text_box.get_width()
+		text_box_height = text_box.get_height()
+		self.image.image = pygame_instance.transform.scale(self.image.image, (text_box_width + 60, text_box_height + 30))
+
+
+

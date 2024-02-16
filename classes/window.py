@@ -65,18 +65,14 @@ class Window:
 
 
 	def draw_continue_instructions(self):
-		space_text = 'Press SPACE to continue'
-		space_button = Button(space_text)
-		text_box = game_font.render(space_text, True, (2, 36, 8))
-		text_box_width = text_box.get_width()
-		text_box_height = text_box.get_height()
+		space_button = Button('Press SPACE to continue')
+		space_button.change_button_size()
 
-		space_button.image.image = pygame_instance.transform.scale(space_button.image.image, (text_box_width + 60, text_box_height + 30))
+		# space_button.image.x = Window.WIDTH // 2 - text_box_width // 2 - 30
+		# space_button.text_x = space_button.image.x + 30
+		# space_button.image.y = 210
+		# space_button.text_y = space_button.image.y + 15
 
-		space_button.image.x = Window.WIDTH // 2 - text_box_width // 2 - 30
-		space_button.text_x = space_button.image.x + 30
-		space_button.image.y = 210
-		space_button.text_y = space_button.image.y + 15
 		space_button.draw_button(self.window)
 
 
@@ -100,22 +96,19 @@ class Window:
 		else:
 			win_text = f"{best_hand}, you get {win_amount}."
 
-		text_box = game_font.render(win_text, True, (2, 36, 8))
-		text_box_width = text_box.get_width()
-		text_box_height = text_box.get_height()
-
 		result_button = Button(win_text)
-		result_button.image.image = pygame_instance.transform.scale(result_button.image.image, (text_box_width + 60, text_box_height + 30))
-		result_button.image.x = Window.WIDTH // 2 - text_box_width // 2 - 30
-		result_button.text_x = result_button.image.x + 30
-		result_button.image.y = 125
-		result_button.text_y = result_button.image.y + 15
+		result_button.change_button_size()
+
+		# result_button.image.x = Window.WIDTH // 2 - text_box_width // 2 - 30
+		# result_button.text_x = result_button.image.x + 30
+		# result_button.image.y = 125
+		# result_button.text_y = result_button.image.y + 15
 
 		result_button.draw_button(self.window)
 		self.draw_continue_instructions()
 		self.draw_cards()
 		pygame_instance.display.flip()
-		self.endgame_loop()
+		self.wait_for_spacekey_loop()
 
 
 	def draw_buttons(self):
