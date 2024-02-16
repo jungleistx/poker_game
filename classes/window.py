@@ -49,6 +49,8 @@ class Window:
 			self.check_swaps()
 		elif self.submit.image.is_clicked(mouse_pos):
 			self.continue_button()
+		elif self.quit.image.is_clicked(mouse_pos):
+			self.quit_and_exit()
 
 
 	def check_swaps(self):
