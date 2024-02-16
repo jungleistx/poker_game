@@ -28,8 +28,8 @@ class Window:
 
 		self.swap = Button('Swap cards', swap_x, swap_y, swap_text_x, swap_text_y)
 		self.submit = Button('Continue', submit_x, submit_y, submit_text_x, submit_text_y)
-		self.swap.update_coordinates()
-		self.submit.update_coordinates()
+		# self.swap.update_coordinates()
+		# self.submit.update_coordinates()
 
 
 	def check_mouseclick_cards(self):

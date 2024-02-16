@@ -14,7 +14,7 @@ class Button:
 		self.image.image = pygame_instance.transform.scale(self.image.image, (Button.WIDTH, Button.HEIGHT))
 		self.text_x = b_x
 		self.text_y = b_y
-
+		self.update_coordinates()
 
 	def update_coordinates(self):
 		self.image.set_current_rect()
