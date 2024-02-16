@@ -165,7 +165,7 @@ class Hand():
 		elif self.check_same_of_a_kind(4):
 			return f"Four-of-a-kind - {self.cards[0].rank}'s", Hand.FOUR_OF_A_KIND
 		elif self.check_same_of_a_kind(3) and self.check_same_of_a_kind(2):
-			return f"Full house - {self.cards[0].rank}'s full of {self.cards[3].rank}", Hand.FULL_HOUSE
+			return f"Full house - {self.cards[0].rank}'s full of {self.cards[3].rank}'s", Hand.FULL_HOUSE
 		elif self.check_flush():
 			return f"Flush - {self.cards[0].rank} high", Hand.FLUSH
 		elif self.check_straight():
