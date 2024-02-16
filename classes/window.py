@@ -75,8 +75,7 @@ class Window:
 		while True:
 			for event in pygame_instance.event.get():
 				if event.type == pygame_instance.QUIT:
-					pygame_instance.quit()
-					exit()
+					self.quit_and_exit()
 				elif event.type == pygame_instance.KEYDOWN:
 					if event.key == pygame_instance.K_SPACE:
 						self.run()
@@ -146,9 +145,7 @@ class Window:
 	def check_events(self):
 		for event in pygame_instance.event.get():
 			if event.type == pygame_instance.QUIT:
-				print('Thank you come again!')
-				pygame_instance.quit()
-				exit()
+				self.quit_and_exit()
 			if event.type == pygame_instance.MOUSEBUTTONDOWN:
 				if event.button == 1:
 					self.check_mouseclick_cards()
@@ -158,7 +155,9 @@ class Window:
 
 
 	def new_game(self):
-		self.intro_window()
+	def quit_and_exit(self):
+		pygame_instance.quit()
+		exit()
 
 
 	def draw_intro_texts(self):
