@@ -64,6 +64,22 @@ class Window:
 		self.draw_endgame_screen()
 
 
+	def draw_continue_instructions(self):
+		space_text = 'Press SPACE to continue'
+		space_button = Button(space_text)
+		text_box = game_font.render(space_text, True, (2, 36, 8))
+		text_box_width = text_box.get_width()
+		text_box_height = text_box.get_height()
+
+		space_button.image.image = pygame_instance.transform.scale(space_button.image.image, (text_box_width + 60, text_box_height + 30))
+
+		space_button.image.x = Window.WIDTH // 2 - text_box_width // 2 - 30
+		space_button.text_x = space_button.image.x + 30
+		space_button.image.y = 210
+		space_button.text_y = space_button.image.y + 15
+		space_button.draw_button(self.window)
+
+
 	def draw_endgame_screen(self):
 		best_hand, win_multiplier = self.game.player.check_hand()
 		# win_amount = self.game.player.bet * win_multiplier
