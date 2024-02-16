@@ -4,4 +4,4 @@ import pygame_manager
 
 gamewindow = Window()
 while True:
-	gamewindow.run()
+	gamewindow.new_game()
