@@ -80,6 +80,17 @@ class Window:
 		space_button.draw_button(self.window)
 
 
+	def endgame_loop(self):
+		while True:
+			for event in pygame_instance.event.get():
+				if event.type == pygame_instance.QUIT:
+					pygame_instance.quit()
+					exit()
+				elif event.type == pygame_instance.KEYDOWN:
+					if event.key == pygame_instance.K_SPACE:
+						self.new_game()
+
+
 	def draw_endgame_screen(self):
 		best_hand, win_multiplier = self.game.player.check_hand()
 		# win_amount = self.game.player.bet * win_multiplier
@@ -101,18 +112,10 @@ class Window:
 		result_button.text_y = result_button.image.y + 15
 
 		result_button.draw_button(self.window)
+		self.draw_continue_instructions()
 		self.draw_cards()
-		# add instruction for space bar (newgame)
 		pygame_instance.display.flip()
-
-		while True:
-			for event in pygame_instance.event.get():
-				if event.type == pygame_instance.QUIT:
-					pygame_instance.quit()
-					exit()
-				elif event.type == pygame_instance.KEYDOWN:
-					if event.key == pygame_instance.K_SPACE:
-						self.new_game()
+		self.endgame_loop()
 
 
 	def draw_buttons(self):
