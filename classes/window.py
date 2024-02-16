@@ -79,7 +79,7 @@ class Window:
 					exit()
 				elif event.type == pygame_instance.KEYDOWN:
 					if event.key == pygame_instance.K_SPACE:
-						self.new_game()
+						self.run()
 
 
 	def draw_endgame_screen(self):
@@ -157,14 +157,68 @@ class Window:
 
 
 	def new_game(self):
-		self.game.reset_deck()
-		self.run()
+		self.intro_window()
+
+
+	def draw_intro_texts(self):
+		text_colour = (227, 192, 64)
+		text_lines_1 = ['', 'TRY TO GET THE BEST HAND POSSIBLE.', 'YOU HAVE ONE SWAP, YOU CAN SWAP ANY CARD.',  '']
+		text_lines_2 = ['PRESS KEYS 1-5 TO SELECT CARDS FOR SWAPPING.', 'PRESS SPACE KEY TO CONFIRM SWAPS, OR TO END GAME.', 'IF YOU PREFER, YOU CAN USE MOUSE.', '', 'GOOD LUCK, HAVE FUN!', '']
+		header_text = 'WELCOME TO VIDEO POKER!'
+		bold_text = ['INSTRUCTIONS:', 'PRESS SPACE TO START!']
+
+		header_font = pygame_instance.font.SysFont('chalkboard', 48, bold=True)
+		text = header_font.render(header_text, True, text_colour)
+		header_width = text.get_width()
+		header_font = pygame_instance.freetype.SysFont('chalkboard', 48, bold=True)
+		x = Window.WIDTH // 2 - header_width // 2 - 15
+		header_font.render_to(self.window, (x, 80), header_text, text_colour)
+
+		mid_font = pygame_instance.freetype.SysFont('chalkboard', 28)
+		y = 120
+		for line in text_lines_1:
+			text = game_font.render(line, True, text_colour)
+			text_width = text.get_width()
+			text_height = text.get_height()
+			x = Window.WIDTH // 2 - text_width // 2
+			mid_font.render_to(self.window, (x, y), line, text_colour)
+			y += text_height + 5
+
+		bold_font = pygame_instance.font.SysFont('chalkboard', 38, bold=True)
+		text = bold_font.render(bold_text[0], True, text_colour)
+		bold_width_0 = text.get_width()
+		text = bold_font.render(bold_text[1], True, text_colour)
+		bold_width_1 = text.get_width()
+		bold_font = pygame_instance.freetype.SysFont('chalkboard', 38, bold=True)
+		x = Window.WIDTH // 2 - bold_width_0 // 2
+
+		bold_font.render_to(self.window, (x, y), bold_text[0], text_colour)
+
+		y += 50
+		for line in text_lines_2:
+			text = game_font.render(line, True, text_colour)
+			text_width = text.get_width()
+			text_height = text.get_height()
+			x = Window.WIDTH // 2 - text_width // 2
+			mid_font.render_to(self.window, (x, y), line, text_colour)
+			y += text_height + 5
+
+		x = Window.WIDTH // 2 - bold_width_1 // 2
+		bold_font.render_to(self.window, (x, y), bold_text[1], text_colour)
+
+
+	def intro_window(self):
+		intro_screen_colour = (102, 128, 103)
+		self.window.fill(intro_screen_colour)
+
+		self.draw_intro_texts()
+
+		pygame_instance.display.flip()
+		self.wait_userinput_loop()
 
 
 	def run(self):
-		# intro screen
-		# new game
-
+		self.game.reset_deck()
 		clock = pygame_instance.time.Clock()
 
 		while True:
@@ -175,5 +229,4 @@ class Window:
 			self.draw_buttons()
 
 			pygame_instance.display.flip()
-			# pygame_instance.time.delay(200)
 			clock.tick(60)
