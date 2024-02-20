@@ -1,5 +1,6 @@
 from classes.deck import Deck
 from classes.hand import Hand
+from pygame_manager import pygame_instance
 
 
 class Player:
@@ -33,6 +34,13 @@ class Player:
 
 	def set_starting_coins(self):
 		self.coins = 50
+
+
+	def draw_coins(self, window):
+		text_colour = (227, 192, 64)
+		text = f"COINS: {str(self.coins)}"
+		font = pygame_instance.freetype.SysFont('chalkboard', 26)
+		font.render_to(window, (15, 20), text, text_colour)
 
 
 	def __str__(self):
