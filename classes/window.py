@@ -67,7 +67,7 @@ class Window:
 
 
 	def draw_continue_instructions(self):
-		space_button = Button('Press SPACE to continue')
+		space_button = Button('Press SPACE to continue or Q to quit')
 		space_button.change_button_size()
 		space_button.set_new_location(Window.WIDTH, 210)
 		space_button.draw_button(self.window)
@@ -81,6 +81,8 @@ class Window:
 				elif event.type == pygame_instance.KEYDOWN:
 					if event.key == pygame_instance.K_SPACE:
 						self.run()
+					elif event.key == pygame_instance.K_q:
+						self.quit_and_exit()
 
 
 	def draw_endgame_screen(self):
