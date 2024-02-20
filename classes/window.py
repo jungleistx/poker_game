@@ -90,9 +90,9 @@ class Window:
 		# win_amount = self.game.player.bet * win_multiplier
 		win_amount = win_multiplier
 		if win_amount > 0:
-			win_text = f"{best_hand}, you win {win_amount}!"
+			win_text = f"You win {win_amount}!"
 		else:
-			win_text = f"{best_hand}, you get {win_amount}."
+			win_text = f"You lost your bet."
 
 		result_button = Button(win_text)
 		result_button.change_button_size()
