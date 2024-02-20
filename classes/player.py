@@ -31,5 +31,9 @@ class Player:
 		self.hand.move_card_with_key(key)
 
 
+	def set_starting_coins(self):
+		self.coins = 50
+
+
 	def __str__(self):
 		return f"{self.hand}"
