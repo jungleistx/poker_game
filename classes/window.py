@@ -101,6 +101,7 @@ class Window:
 
 		self.draw_continue_instructions()
 		self.draw_cards()
+		self.draw_hand_info(best_hand)
 		pygame_instance.display.flip()
 		self.spacekey_to_continue()
 		self.run()
@@ -164,6 +165,16 @@ class Window:
 	def quit_and_exit(self):
 		pygame_instance.quit()
 		exit()
+
+
+	def draw_hand_info(self, best_hand:str=None):
+		text_colour = (227, 192, 64)
+		if best_hand == None:
+			hand, multiplier = self.game.player.check_hand()
+		else:
+			hand = best_hand
+		font = pygame_instance.freetype.SysFont('chalkboard', 26)
+		font.render_to(self.window, (40, 530), hand, text_colour)
 
 
 	def draw_intro_texts(self):
@@ -237,6 +248,7 @@ class Window:
 			self.check_events()
 			self.draw_cards()
 			self.draw_buttons()
+			self.draw_hand_info()
 
 			pygame_instance.display.flip()
 			clock.tick(60)
