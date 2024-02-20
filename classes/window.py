@@ -229,13 +229,14 @@ class Window:
 		self.window.fill(intro_screen_colour)
 
 		self.draw_intro_texts()
-
 		pygame_instance.display.flip()
-		self.wait_userinput_loop()
+		self.spacekey_to_continue()
+		self.game.player.set_starting_coins()
 
 
 	def new_game(self):
 		self.intro_window()
+		self.run()
 
 
 	def run(self):
