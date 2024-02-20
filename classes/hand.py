@@ -161,7 +161,7 @@ class Hand():
 		if self.check_royal_flush():
 			return f"Royal flush", Hand.ROYAL_FLUSH
 		elif self.check_straight_flush():
-			return f"Straight flush - {self.cards[0]} high", Hand.STRAIGHT_FLUSH
+			return f"Straight flush - {self.cards[0].rank} high", Hand.STRAIGHT_FLUSH
 		elif self.check_same_of_a_kind(4):
 			return f"Four-of-a-kind - {self.cards[0].rank}'s", Hand.FOUR_OF_A_KIND
 		elif self.check_same_of_a_kind(3) and self.check_same_of_a_kind(2):
