@@ -73,14 +73,14 @@ class Window:
 		space_button.draw_button(self.window)
 
 
-	def wait_userinput_loop(self):
+	def spacekey_to_continue(self):
 		while True:
 			for event in pygame_instance.event.get():
 				if event.type == pygame_instance.QUIT:
 					self.quit_and_exit()
 				elif event.type == pygame_instance.KEYDOWN:
 					if event.key == pygame_instance.K_SPACE:
-						self.run()
+						return
 					elif event.key == pygame_instance.K_q:
 						self.quit_and_exit()
 
@@ -102,7 +102,8 @@ class Window:
 		self.draw_continue_instructions()
 		self.draw_cards()
 		pygame_instance.display.flip()
-		self.wait_userinput_loop()
+		self.spacekey_to_continue()
+		self.run()
 
 
 	def draw_buttons(self):
