@@ -245,6 +245,7 @@ class Window:
 
 		while True:
 			self.background.draw_image(self.window)
+			self.game.player.draw_coins(self.window)
 			self.set_card_locations()
 			self.check_events()
 			self.draw_cards()
